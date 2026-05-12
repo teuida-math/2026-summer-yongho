@@ -4,9 +4,97 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>트이다 수학 — 용호점 여름방학 수업 안내</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif; color: #1a1a1a; min-height: 100vh; padding: 2rem 1rem; }
+
+    /* ── 인트로 ── */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: #0d1130;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    #intro-wordmark {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: clamp(13px, 3vw, 16px);
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards 0.3s;
+    }
+    #intro-text {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phrase {
+      position: absolute;
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 300;
+      color: #f0ede8;
+      text-align: center;
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      width: 100%;
+      transition: opacity 0.6s ease;
+    }
+    #p1 { color: #fff; }
+    #intro-skip {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: 'Noto Sans KR', sans-serif;
+      padding: 8px 12px;
+      transition: color 0.2s;
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards 1.2s;
+    }
+    #intro-skip:hover { color: rgba(255,255,255,0.6); }
+    #intro-progress {
+      position: absolute;
+      bottom: 2.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards 1.2s;
+    }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.4s; }
+    .dot.active { background: rgba(255,255,255,0.5); }
+    @keyframes fadeIn { to { opacity: 1; } }
+    #intro.leaving { animation: overlayOut 0.9s ease forwards; }
+    @keyframes overlayOut { to { opacity: 0; pointer-events: none; } }
+
+    /* ── 본 페이지 ── */
+    #main {
+      opacity: 0;
+      transition: opacity 0.6s ease 0.2s;
+    }
+    #main.visible { opacity: 1; }
+
+    body { background: #f5f5f3; font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; color: #1a1a1a; min-height: 100vh; padding: 2rem 1rem; }
     .wrap { max-width: 640px; margin: 0 auto; }
     .header { text-align: center; margin-bottom: 2rem; }
     .header h1 { font-size: 22px; font-weight: 500; color: #1a1a1a; line-height: 1.5; }
@@ -41,8 +129,6 @@
     .season-text { font-size: 13px; color: #1a1a1a; }
     .note { background: #fff; border: 1px solid #ebebeb; border-radius: 14px; padding: 14px 16px; font-size: 13px; color: #666; line-height: 1.8; margin-top: 0.5rem; }
     .note a { color: #185fa5; text-decoration: none; font-weight: 500; }
-
-    /* 예약 폼 */
     .form-section { margin-top: 2.5rem; }
     .form-title { font-size: 18px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
     .form-sub { font-size: 13px; color: #888; margin-bottom: 1.25rem; }
@@ -52,19 +138,9 @@
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group label { font-size: 12px; color: #555; font-weight: 600; }
     .form-group input, .form-group select, .form-group textarea {
-      font-size: 14px; color: #1a1a1a;
-      background: #f8f8f7;
-      border: 1px solid #e5e5e5;
-      border-radius: 10px;
-      padding: 10px 12px;
-      width: 100%;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.15s, background 0.15s;
+      font-size: 14px; color: #1a1a1a; background: #f8f8f7; border: 1px solid #e5e5e5; border-radius: 10px; padding: 10px 12px; width: 100%; font-family: inherit; outline: none; transition: border-color 0.15s, background 0.15s;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      border-color: #378add; background: #fff;
-    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #378add; background: #fff; }
     .form-group textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
     .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Cpath fill='%23999' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-color: #f8f8f7; padding-right: 32px; }
     .required { color: #e24b4a; margin-left: 2px; }
@@ -75,7 +151,9 @@
     .success-icon { font-size: 48px; margin-bottom: 14px; }
     .success-title { font-size: 17px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
     .success-desc { font-size: 13px; color: #888; line-height: 1.7; }
-
+    .cb-item { display: flex; align-items: center; gap: 10px; padding: 8px 4px; border-bottom: 1px solid #efefef; cursor: pointer; font-size: 14px; color: #1a1a1a; }
+    .cb-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: #185fa5; cursor: pointer; flex-shrink: 0; }
+    .cb-item span { flex: 1; line-height: 1.4; }
     @media (max-width: 480px) {
       .card-body { grid-template-columns: 1fr; }
       .info-item.full { grid-column: 1; }
@@ -86,6 +164,23 @@
   </style>
 </head>
 <body>
+
+<!-- ── 인트로 ── -->
+<div id="intro">
+  <div id="intro-wordmark">TEUIDA MATH</div>
+  <div id="intro-text">
+    <span class="phrase" id="p0">버팀의 끝에</span>
+    <span class="phrase" id="p1">마침내, 트이다.</span>
+  </div>
+  <div id="intro-progress">
+    <div class="dot active" id="d0"></div>
+    <div class="dot" id="d1"></div>
+  </div>
+  <button id="intro-skip" onclick="skipIntro()">SKIP ›</button>
+</div>
+
+<!-- ── 본 페이지 ── -->
+<div id="main">
 <div class="wrap">
   <div class="header">
     <h1>트이다 수학 — 용호점<br>여름방학 수업 안내</h1>
@@ -120,6 +215,18 @@
       <hr class="divider">
       <div class="card-desc">수업 복습 노트 제작. 하원 후 학부모님께 전송</div>
     </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="course-name">중등 개념 완성</span>
+        <span class="badge badge-group">단체 수업</span>
+        <span class="badge badge-season">상시 운영</span>
+      </div>
+      <div class="card-body">
+        <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">중등 개념 1회 이상 학습</span></div>
+        <div class="info-item"><span class="info-label">교재</span><span class="info-value">원리해설</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">주 2회 · 8주 완성</span></div>
+      </div>
+    </div>
   </div>
 
   <!-- 고등 브릿지 -->
@@ -141,6 +248,22 @@
       <div class="reserve-bar">
         <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
         <button class="reserve-btn" onclick="scrollToForm('노베 도형 가이드')">📅 수업 예약</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 고등 -->
+  <div class="section">
+    <div class="section-label">고등</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="course-name">고등 개별 진도</span>
+        <span class="badge badge-personal">개별 진도</span>
+        <span class="badge badge-season">상시 운영</span>
+      </div>
+      <div class="card-body">
+        <div class="info-item"><span class="info-label">교재</span><span class="info-value">개인별 맞춤</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">개인별 맞춤</span></div>
       </div>
     </div>
   </div>
@@ -288,22 +411,25 @@
             </select>
           </div>
         </div>
-        <div class="form-row">
+        <div class="form-row single">
           <div class="form-group">
-            <label>희망 과정 <span class="required">*</span></label>
-            <select id="f-course">
-              <option value="">선택해 주세요</option>
-              <option>중등 개별 진도</option>
-              <option>중등 개념 입문</option>
-              <option>노베 도형 가이드</option>
-              <option>고등 공통수학 개념 입문</option>
-              <option>고등 공통수학 개념 완성</option>
-              <option>고등 공통수학 심화</option>
-              <option>고등 대수 개념 완성</option>
-              <option>고등 미적분1 개념 완성</option>
-            </select>
+            <label>희망 과정 <span class="required">*</span> <span style="font-weight:400;color:#aaa;font-size:11px;">복수 선택 가능</span></label>
+            <div id="f-course-list" style="background:#f8f8f7;border:1px solid #e5e5e5;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:0;">
+              <label class="cb-item"><input type="checkbox" name="course" value="중등 개별 진도"><span>중등 개별 진도</span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="중등 개념 입문"><span>중등 개념 입문 <span style="color:#aaa;font-size:12px;">(숨마쿰라우데)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="중등 개념 완성"><span>중등 개념 완성 <span style="color:#aaa;font-size:12px;">(원리해설)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="노베 도형 가이드"><span>노베 도형 가이드 <span style="color:#aaa;font-size:12px;">(노베 도형 가이드)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 개별 진도"><span>고등 개별 진도</span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 개념 입문"><span>고등 공통수학 개념 입문 <span style="color:#aaa;font-size:12px;">(노베 공통수학)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 개념 완성"><span>고등 공통수학 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 공통수학)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 심화"><span>고등 공통수학 심화</span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 대수 개념 완성"><span>고등 대수 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 대수)</span></span></label>
+              <label class="cb-item" style="border-bottom:none;"><input type="checkbox" name="course" value="고등 미적분1 개념 완성"><span>고등 미적분1 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 미적분1)</span></span></label>
+            </div>
           </div>
-          <div class="form-group">
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="grid-column:1/-1;">
             <label>연락처 (학부모님) <span class="required">*</span></label>
             <input type="tel" id="f-phone" placeholder="010-0000-0000">
           </div>
@@ -330,18 +456,81 @@
     </div>
   </div>
 </div>
+</div>
 
 <script>
+  /* ── 인트로 ── */
+  var sequence = [
+    { id: 'p0', dot: 'd0', start: 600,  hold: 1800 },
+    { id: 'p1', dot: 'd1', start: 2800, hold: 2200 }
+  ];
+  var endTime = 5600;
+  var timers = [];
+  var skipped = false;
+
+  function runIntro() {
+    skipped = false;
+    sequence.forEach(function(s) {
+      var el = document.getElementById(s.id);
+      el.style.transition = 'none';
+      el.style.opacity = 0;
+    });
+    document.getElementById('d0').classList.add('active');
+    document.getElementById('d1').classList.remove('active');
+
+    sequence.forEach(function(s, i) {
+      var t1 = setTimeout(function() {
+        if (skipped) return;
+        var el = document.getElementById(s.id);
+        el.style.transition = 'opacity 0.7s ease';
+        el.style.opacity = 1;
+        document.getElementById(s.dot).classList.add('active');
+        if (i > 0) document.getElementById(sequence[i-1].dot).classList.remove('active');
+      }, s.start);
+      var t2 = setTimeout(function() {
+        if (skipped) return;
+        var el = document.getElementById(s.id);
+        el.style.transition = 'opacity 0.6s ease';
+        el.style.opacity = 0;
+      }, s.start + s.hold);
+      timers.push(t1, t2);
+    });
+
+    var t3 = setTimeout(function() {
+      if (skipped) return;
+      finishIntro();
+    }, endTime);
+    timers.push(t3);
+  }
+
+  function finishIntro() {
+    var intro = document.getElementById('intro');
+    intro.classList.add('leaving');
+    setTimeout(function() {
+      intro.style.display = 'none';
+      document.getElementById('main').classList.add('visible');
+    }, 900);
+  }
+
+  function skipIntro() {
+    skipped = true;
+    timers.forEach(clearTimeout);
+    finishIntro();
+  }
+
+  runIntro();
+
+  /* ── 예약 폼 ── */
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwKb0RAVuC-ZzP4qrQd_2GpywlgXahcrwSJPcFOLMdvcPZYFuAixnhHlh1KUcgJIM-N/exec';
 
   function scrollToForm(course) {
     document.getElementById('reservation-form').scrollIntoView({ behavior: 'smooth' });
     if (course) {
       setTimeout(function() {
-        var sel = document.getElementById('f-course');
-        for (var i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].text === course) { sel.selectedIndex = i; break; }
-        }
+        var boxes = document.querySelectorAll('input[name="course"]');
+        boxes.forEach(function(cb) {
+          if (cb.value === course) cb.checked = true;
+        });
       }, 500);
     }
   }
@@ -349,13 +538,14 @@
   function submitForm() {
     var name = document.getElementById('f-name').value.trim();
     var grade = document.getElementById('f-grade').value;
-    var course = document.getElementById('f-course').value;
     var phone = document.getElementById('f-phone').value.trim();
     var book = document.getElementById('f-book').value.trim();
     var memo = document.getElementById('f-memo').value.trim();
+    var checked = Array.from(document.querySelectorAll('input[name="course"]:checked')).map(function(cb){ return cb.value; });
+    var course = checked.join(', ');
 
-    if (!name || !grade || !course || !phone) {
-      alert('이름, 학년, 희망 과정, 연락처는 필수 입력 항목입니다.');
+    if (!name || !grade || checked.length === 0 || !phone) {
+      alert('이름, 학년, 희망 과정(1개 이상), 연락처는 필수 입력 항목입니다.');
       return;
     }
 
