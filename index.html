@@ -51,7 +51,7 @@
       letter-spacing: 0.02em;
       opacity: 0;
       width: 100%;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.4s ease; /* 전환 속도를 조금 더 빠르게 수정 */
     }
     #p1 { color: #fff; }
     #intro-skip {
@@ -68,7 +68,7 @@
       padding: 8px 12px;
       transition: color 0.2s;
       opacity: 0;
-      animation: fadeIn 0.6s ease forwards 1.2s;
+      animation: fadeIn 0.6s ease forwards 0.8s;
     }
     #intro-skip:hover { color: rgba(255,255,255,0.6); }
     #intro-progress {
@@ -79,18 +79,18 @@
       display: flex;
       gap: 7px;
       opacity: 0;
-      animation: fadeIn 0.6s ease forwards 1.2s;
+      animation: fadeIn 0.6s ease forwards 0.8s;
     }
     .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.4s; }
     .dot.active { background: rgba(255,255,255,0.5); }
     @keyframes fadeIn { to { opacity: 1; } }
-    #intro.leaving { animation: overlayOut 0.9s ease forwards; }
+    #intro.leaving { animation: overlayOut 0.7s ease forwards; }
     @keyframes overlayOut { to { opacity: 0; pointer-events: none; } }
 
     /* ── 본 페이지 ── */
     #main {
       opacity: 0;
-      transition: opacity 0.6s ease 0.2s;
+      transition: opacity 0.5s ease 0.1s;
     }
     #main.visible { opacity: 1; }
 
@@ -117,7 +117,27 @@
     .freq { font-size: 14px; font-weight: 600; color: #185fa5; }
     .divider { border: none; border-top: 1px solid #f0f0f0; }
     .card-desc { padding: 10px 16px 14px; font-size: 13px; color: #666; line-height: 1.7; }
-    .highlight-bar { display: flex; align-items: center; gap: 6px; background: #fef6e8; border-radius: 10px; padding: 8px 12px; margin: 0 16px 14px; font-size: 12px; font-weight: 600; color: #9a5c00; }
+    
+    /* 강조바에 애니메이션 추가 */
+    .highlight-bar { 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+      background: #fef6e8; 
+      border-radius: 10px; 
+      padding: 8px 12px; 
+      margin: 0 16px 14px; 
+      font-size: 12px; 
+      font-weight: 600; 
+      color: #9a5c00;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.01); background: #fff2d9; }
+      100% { transform: scale(1); }
+    }
+
     .reserve-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #eef5fc; border-radius: 10px; padding: 9px 12px; margin: 0 16px 14px; }
     .reserve-text { font-size: 12px; color: #185fa5; }
     .reserve-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #0c447c; background: #fff; border: 1px solid #b5d4f4; border-radius: 8px; padding: 6px 14px; cursor: pointer; white-space: nowrap; font-family: inherit; transition: background 0.15s; }
@@ -459,12 +479,12 @@
 </div>
 
 <script>
-  /* ── 인트로 ── */
+  /* ── 인트로 (수정: 시간을 짧고 타이트하게 변경) ── */
   var sequence = [
-    { id: 'p0', dot: 'd0', start: 600,  hold: 1800 },
-    { id: 'p1', dot: 'd1', start: 2800, hold: 2200 }
+    { id: 'p0', dot: 'd0', start: 400,  hold: 1200 }, // 시작과 유지 시간을 줄임
+    { id: 'p1', dot: 'd1', start: 1800, hold: 1400 }
   ];
-  var endTime = 5600;
+  var endTime = 3600; // 전체 인트로 시간을 5.6초에서 3.6초로 단축
   var timers = [];
   var skipped = false;
 
@@ -482,7 +502,7 @@
       var t1 = setTimeout(function() {
         if (skipped) return;
         var el = document.getElementById(s.id);
-        el.style.transition = 'opacity 0.7s ease';
+        el.style.transition = 'opacity 0.6s ease';
         el.style.opacity = 1;
         document.getElementById(s.dot).classList.add('active');
         if (i > 0) document.getElementById(sequence[i-1].dot).classList.remove('active');
@@ -490,7 +510,7 @@
       var t2 = setTimeout(function() {
         if (skipped) return;
         var el = document.getElementById(s.id);
-        el.style.transition = 'opacity 0.6s ease';
+        el.style.transition = 'opacity 0.5s ease';
         el.style.opacity = 0;
       }, s.start + s.hold);
       timers.push(t1, t2);
@@ -509,7 +529,7 @@
     setTimeout(function() {
       intro.style.display = 'none';
       document.getElementById('main').classList.add('visible');
-    }, 900);
+    }, 700);
   }
 
   function skipIntro() {
@@ -519,6 +539,13 @@
   }
 
   runIntro();
+
+  /* ── 연락처 자동 하이픈 추가 ── */
+  document.getElementById('f-phone').addEventListener('input', function(e) {
+    this.value = this.value
+      .replace(/[^0-9]/g, '')
+      .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+  });
 
   /* ── 예약 폼 ── */
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwKb0RAVuC-ZzP4qrQd_2GpywlgXahcrwSJPcFOLMdvcPZYFuAixnhHlh1KUcgJIM-N/exec';
