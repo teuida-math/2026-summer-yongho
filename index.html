@@ -8,84 +8,82 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── 인트로 ── */
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: #0d1130;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    #intro-wordmark {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: clamp(13px, 3vw, 16px);
-      font-weight: 400;
-      letter-spacing: 0.45em;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
-      margin-bottom: 3.5rem;
-      opacity: 0;
-      animation: fadeIn 0.8s ease forwards 0.3s;
-    }
-    #intro-text {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      height: 5em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .phrase {
-      position: absolute;
-      font-family: 'Noto Serif KR', serif;
-      font-size: clamp(20px, 5vw, 28px);
-      font-weight: 300;
-      color: #f0ede8;
-      text-align: center;
-      line-height: 1.9;
-      letter-spacing: 0.02em;
-      opacity: 0;
-      width: 100%;
-      transition: opacity 0.4s ease; /* 전환 속도를 조금 더 빠르게 수정 */
-    }
-    #p1 { color: #fff; }
-    #intro-skip {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 11px;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.12em;
-      cursor: pointer;
-      border: none;
-      background: none;
-      font-family: 'Noto Sans KR', sans-serif;
-      padding: 8px 12px;
-      transition: color 0.2s;
-      opacity: 0;
-      animation: fadeIn 0.6s ease forwards 0.8s;
-    }
-    #intro-skip:hover { color: rgba(255,255,255,0.6); }
-    #intro-progress {
-      position: absolute;
-      bottom: 2.8rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 7px;
-      opacity: 0;
-      animation: fadeIn 0.6s ease forwards 0.8s;
-    }
-    .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.4s; }
-    .dot.active { background: rgba(255,255,255,0.5); }
-    @keyframes fadeIn { to { opacity: 1; } }
-    #intro.leaving { animation: overlayOut 0.7s ease forwards; }
-    @keyframes overlayOut { to { opacity: 0; pointer-events: none; } }
+  /* ── 인트로 ── */
+  #intro {
+    position: fixed;
+    inset: 0;
+    background: #0d1130;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  #intro-wordmark {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(13px, 3vw, 16px);
+    font-weight: 400;
+    letter-spacing: 0.45em;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+  }
+  #intro-text {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .phrase {
+    position: absolute;
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 300;
+    color: #f0ede8;
+    text-align: center;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    width: 100%;
+    transition: opacity 0.5s ease;
+  }
+  #intro-skip {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 8px 12px;
+    transition: color 0.2s;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards 0.8s;
+  }
+  #intro-skip:hover { color: rgba(255,255,255,0.6); }
+  #intro-progress {
+    position: absolute;
+    bottom: 2.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 7px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards 0.8s;
+  }
+  .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.4s; }
+  .dot.active { background: rgba(255,255,255,0.5); }
+  @keyframes fadeIn { to { opacity: 1; } }
+  #intro.leaving { animation: overlayOut 0.7s ease forwards; }
+  @keyframes overlayOut { to { opacity: 0; pointer-events: none; } }
 
     /* ── 본 페이지 ── */
     #main {
@@ -196,7 +194,7 @@
     <span class="phrase" id="p1">마침내, 트이다.</span>
   </div>
   <div id="intro-progress">
-    <div class="dot active" id="d0"></div>
+    <div class="dot" id="d0"></div>
     <div class="dot" id="d1"></div>
   </div>
   <button id="intro-skip" onclick="skipIntro()">SKIP ›</button>
@@ -533,48 +531,49 @@
 </div>
 
 <script>
-  /* ── 인트로 (수정: 시간을 짧고 타이트하게 변경) ── */
-  var sequence = [
-    { id: 'p0', dot: 'd0', start: 250,  hold: 900 },
-    { id: 'p1', dot: 'd1', start: 1350, hold: 1100 }
-  ];
-  var endTime = 3000;
+  /* ── 인트로 ── */
   var timers = [];
   var skipped = false;
 
   function runIntro() {
     skipped = false;
-    sequence.forEach(function(s) {
-      var el = document.getElementById(s.id);
-      el.style.transition = 'none';
-      el.style.opacity = 0;
-    });
-    document.getElementById('d0').classList.add('active');
-    document.getElementById('d1').classList.remove('active');
+    var wordmark = document.getElementById('intro-wordmark');
+    var p0 = document.getElementById('p0');
+    var p1 = document.getElementById('p1');
+    var d0 = document.getElementById('d0');
+    var d1 = document.getElementById('d1');
+    wordmark.style.opacity = 0;
+    wordmark.style.transition = 'opacity 0.7s ease';
+    p0.style.opacity = 0;
+    p1.style.opacity = 0;
 
-    sequence.forEach(function(s, i) {
-      var t1 = setTimeout(function() {
-        if (skipped) return;
-        var el = document.getElementById(s.id);
-        el.style.transition = 'opacity 0.6s ease';
-        el.style.opacity = 1;
-        document.getElementById(s.dot).classList.add('active');
-        if (i > 0) document.getElementById(sequence[i-1].dot).classList.remove('active');
-      }, s.start);
-      var t2 = setTimeout(function() {
-        if (skipped) return;
-        var el = document.getElementById(s.id);
-        el.style.transition = 'opacity 0.5s ease';
-        el.style.opacity = 0;
-      }, s.start + s.hold);
-      timers.push(t1, t2);
-    });
+    // 1단계: TEUIDA MATH + 버팀의 끝에서 동시 등장
+    timers.push(setTimeout(function() {
+      if (skipped) return;
+      wordmark.style.opacity = 1;
+      p0.style.opacity = 1;
+      d0.classList.add('active');
+    }, 300));
 
-    var t3 = setTimeout(function() {
+    // 2단계: 버팀의 끝에서 사라짐
+    timers.push(setTimeout(function() {
+      if (skipped) return;
+      p0.style.opacity = 0;
+      d0.classList.remove('active');
+    }, 1600));
+
+    // 3단계: 마침내, 트이다 등장
+    timers.push(setTimeout(function() {
+      if (skipped) return;
+      p1.style.opacity = 1;
+      d1.classList.add('active');
+    }, 1900));
+
+    // 4단계: 인트로 종료
+    timers.push(setTimeout(function() {
       if (skipped) return;
       finishIntro();
-    }, endTime);
-    timers.push(t3);
+    }, 3200));
   }
 
   function finishIntro() {
