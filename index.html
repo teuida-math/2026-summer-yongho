@@ -339,7 +339,7 @@
       .course-tabs-wrap { margin-left: -1rem; margin-right: -1rem; }
       }
   </style>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script></head>
 <body>
 <!-- ── 인트로 ── -->
 <div id="intro">
@@ -610,9 +610,9 @@
 </div>
 </div>
 <!-- 시간표 -->
-<div class="section" id="timetable-section">
-<div class="section-label">수업 시간표</div>
-<div style="background:#fff;border:1px solid #ebebeb;border-radius:14px;overflow:hidden;padding:14px 10px 10px;">
+<div class="section" id="timetable-section"><div class="tt-title-row"><div class="section-label">수업 시간표</div><button class="tt-share-btn" onclick="shareTimetable()" type="button">🔗 시간표 공유</button></div>
+
+<div class="tt-capture" id="timetable-capture"><div class="tt-capture-brand"><div class="brand-title">트이다 수학 — 용호점 운영 시간표</div><div class="brand-sub">2026 여름방학 특별 과정</div></div>
 <style>
         .tt-wrap { font-family: 'Noto Sans KR', sans-serif; }
         .tt-wrap table { border-collapse: collapse; width: 100%; table-layout: fixed; }
@@ -1029,6 +1029,81 @@
         document.getElementById('success-box').style.display = 'block';
       });
   }
+  /* ── 시간표 공유 ── */
+  async function shareTimetable() {
+    var target = document.getElementById('timetable-capture');
+    if (!target) {
+      alert('시간표 영역을 찾을 수 없습니다.');
+      return;
+    }
+
+    if (typeof html2canvas === 'undefined') {
+      alert('공유 기능을 불러오는 중입니다. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
+
+    var btn = document.querySelector('.tt-share-btn');
+    var originalText = btn ? btn.textContent : '';
+    if (btn) {
+      btn.textContent = '이미지 준비 중...';
+      btn.disabled = true;
+    }
+
+    try {
+      target.classList.add('tt-capturing');
+
+      // 가로 스크롤이 생긴 시간표도 전체 폭을 캡처하도록 실제 scrollWidth 기준으로 캡처
+      var canvas = await html2canvas(target, {
+        scale: Math.min(window.devicePixelRatio || 2, 3),
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+        scrollX: 0,
+        scrollY: -window.scrollY,
+        width: target.scrollWidth,
+        height: target.scrollHeight,
+        windowWidth: Math.max(document.documentElement.clientWidth, target.scrollWidth)
+      });
+
+      target.classList.remove('tt-capturing');
+
+      var blob = await new Promise(function(resolve) {
+        canvas.toBlob(resolve, 'image/png', 0.95);
+      });
+
+      var fileName = '트이다수학_용호점_여름방학_시간표.png';
+      var file = new File([blob], fileName, { type: 'image/png' });
+
+      var shareText = '트이다 수학 용호점 2026 여름방학 운영 시간표입니다. 필요한 수업 시간 확인 후 상담 예약을 남겨주세요.';
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: '트이다 수학 여름방학 시간표',
+          text: shareText,
+          files: [file]
+        });
+      } else {
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(link.href);
+        alert('시간표 이미지가 저장되었습니다. 저장된 이미지를 카카오톡으로 공유해 주세요.');
+      }
+    } catch (err) {
+      target.classList.remove('tt-capturing');
+      console.error(err);
+      alert('시간표 공유 이미지를 만드는 중 문제가 생겼습니다. 화면 캡처로 저장해 주세요.');
+    } finally {
+      if (btn) {
+        btn.textContent = originalText || '🔗 시간표 공유';
+        btn.disabled = false;
+      }
+    }
+  }
+
 </script>
 </body>
 </html>
