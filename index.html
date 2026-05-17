@@ -338,7 +338,126 @@
       .featured-grid { grid-template-columns: 1fr; }
       .course-tabs-wrap { margin-left: -1rem; margin-right: -1rem; }
       }
-  </style>
+  
+    .tt-share-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+    }
+    .tt-share-btn {
+      min-width: 170px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      padding: 11px 16px;
+      border-radius: 12px;
+    }
+    .tt-share-icon {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+
+    /* ── 시간표 공유 액션 버튼 ── */
+    .tt-share-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+      padding: 0 2px;
+    }
+    .tt-share-btn.tt-share-action {
+      width: min(100%, 320px);
+      border: 0;
+      background: transparent;
+      color: #1a1a1a;
+      border-radius: 14px;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .tt-share-btn.tt-share-action:hover {
+      background: rgba(255,255,255,0.65);
+      transform: none;
+    }
+    .tt-share-btn.tt-share-action:active {
+      transform: translateY(1px);
+    }
+    .tt-share-icon-box {
+      width: 44px;
+      height: 44px;
+      border: 1px solid #e1e1de;
+      border-radius: 12px;
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #0d1130;
+      flex: 0 0 auto;
+    }
+    .tt-share-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      align-items: center;
+    }
+    .tt-share-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.35;
+    }
+    .tt-share-sub {
+      font-size: 12px;
+      color: #777;
+      line-height: 1.4;
+    }
+
+    /* ── 시간표 공유 버튼 실제 중앙 정렬 보정 ── */
+    .tt-share-wrap {
+      display: flex !important;
+      justify-content: center !important;
+      width: 100% !important;
+      margin-top: 14px !important;
+      padding: 0 !important;
+    }
+    .tt-share-btn.tt-share-action {
+      width: min(100%, 320px) !important;
+      display: grid !important;
+      grid-template-columns: 44px 1fr 44px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      column-gap: 12px !important;
+      padding: 10px 12px !important;
+      text-align: center !important;
+    }
+    .tt-share-icon-box {
+      grid-column: 1 !important;
+      justify-self: center !important;
+    }
+    .tt-share-text {
+      grid-column: 2 !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+    .tt-share-title,
+    .tt-share-sub {
+      display: block !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
+
+</style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script></head>
 <body>
 <!-- ── 인트로 ── -->
@@ -610,8 +729,7 @@
 </div>
 </div>
 <!-- 시간표 -->
-<div class="section" id="timetable-section"><div class="tt-title-row"><div class="section-label">수업 시간표</div><button class="tt-share-btn" onclick="shareTimetable()" type="button">🔗 시간표 공유</button></div>
-
+<div class="section" id="timetable-section"><div class="tt-title-row"><div class="section-label">수업 시간표</div></div>
 <div class="tt-capture" id="timetable-capture"><div class="tt-capture-brand"><div class="brand-title">트이다 수학 — 용호점 운영 시간표</div><div class="brand-sub">2026 여름방학 특별 과정</div></div>
 <style>
         .tt-wrap { font-family: 'Noto Sans KR', sans-serif; }
@@ -639,7 +757,44 @@
         .tt-legend { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
         .tt-li { display: flex; align-items: center; gap: 3px; font-size: 8.5px; color: #888; }
         .tt-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
-      </style>
+      
+    /* ── 시간표 공유 버튼 실제 중앙 정렬 보정 ── */
+    .tt-share-wrap {
+      display: flex !important;
+      justify-content: center !important;
+      width: 100% !important;
+      margin-top: 14px !important;
+      padding: 0 !important;
+    }
+    .tt-share-btn.tt-share-action {
+      width: min(100%, 320px) !important;
+      display: grid !important;
+      grid-template-columns: 44px 1fr 44px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      column-gap: 12px !important;
+      padding: 10px 12px !important;
+      text-align: center !important;
+    }
+    .tt-share-icon-box {
+      grid-column: 1 !important;
+      justify-self: center !important;
+    }
+    .tt-share-text {
+      grid-column: 2 !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+    .tt-share-title,
+    .tt-share-sub {
+      display: block !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
+
+</style>
 <div class="tt-wrap">
 <div style="overflow-x:auto;">
 <table style="min-width:300px;">
@@ -777,7 +932,11 @@
 <div class="tt-li"><div class="tt-dot" style="background:#EFEFED;border:0.5px solid #B4B2A9"></div>개별진도</div>
 </div>
 </div>
-</div>
+</div><div class="tt-share-wrap"><button class="tt-share-btn tt-share-action" onclick="shareTimetable()" type="button"><span class="tt-share-icon-box"><svg aria-hidden="true" fill="none" height="19" viewbox="0 0 24 24" width="19">
+<path d="M12 3v12" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path d="M7 8l5-5 5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg></span><span class="tt-share-text"><span class="tt-share-title">시간표 공유</span><span class="tt-share-sub">카카오톡 · 이미지 저장</span></span></button></div>
 </div>
 <div class="note">
 <div style="margin-bottom:10px; font-size:13px; color:#555;">문의 · 상담</div>
@@ -1045,7 +1204,10 @@
     var btn = document.querySelector('.tt-share-btn');
     var originalText = btn ? btn.textContent : '';
     if (btn) {
-      btn.textContent = '이미지 준비 중...';
+      btn.classList.add('loading');
+      btn.dataset.originalTitle = btn.querySelector('.tt-share-title') ? btn.querySelector('.tt-share-title').textContent : '';
+      var titleEl = btn.querySelector('.tt-share-title');
+      if (titleEl) titleEl.textContent = '이미지 준비 중...';
       btn.disabled = true;
     }
 
@@ -1098,7 +1260,9 @@
       alert('시간표 공유 이미지를 만드는 중 문제가 생겼습니다. 화면 캡처로 저장해 주세요.');
     } finally {
       if (btn) {
-        btn.textContent = originalText || '🔗 시간표 공유';
+        btn.classList.remove('loading');
+        var titleEl = btn.querySelector('.tt-share-title');
+        if (titleEl) titleEl.textContent = btn.dataset.originalTitle || '시간표 공유';
         btn.disabled = false;
       }
     }
