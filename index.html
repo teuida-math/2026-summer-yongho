@@ -996,22 +996,32 @@
   runIntro();
 
 
-  /* ── 탭 필터 · 카드 펼치기 ── */
+  /* ── 탭 필터 ── */
   function setActiveTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.tab === tab);
     });
 
     document.querySelectorAll('.course-section').forEach(function(section) {
-      var show = tab === 'all' || section.dataset.section === tab || (tab === 'personal' && section.dataset.section === 'middle');
-      // 개인진도 탭에서는 개별진도 카드만 별도로 처리
+      var show = tab === 'all' || section.dataset.section === tab;
+
       if (tab === 'personal') {
         show = section.querySelector('[data-course*="개별 진도"]') !== null || section.dataset.section === 'personal';
       }
+
       section.classList.toggle('hidden-by-tab', !show);
     });
 
-    document.querySelectorAll(');
+    document.querySelectorAll('.course-section .card').forEach(function(card) {
+      var course = card.dataset.course || '';
+      var visible = true;
+
+      if (tab === 'personal') {
+        visible = course.indexOf('개별 진도') > -1;
+      }
+
+      card.classList.toggle('hidden-by-tab', !visible);
+    });
 
     var featured = document.querySelector('[data-featured]');
     if (featured) featured.classList.toggle('hidden-by-tab', tab !== 'all');
@@ -1022,14 +1032,15 @@
       setActiveTab(btn.dataset.tab);
     });
   });
-function focusCourse(courseName) {
-    setActiveTab('all');
-    var card = Array.from(document.querySelectorAll(');
-    if (!card) return;
-    card.classList.add('expanded');
-    var btn = card.querySelector(');
-  }
 
+  function focusCourse(courseName) {
+    setActiveTab('all');
+    var card = Array.from(document.querySelectorAll('.course-section .card')).find(function(el) {
+      return el.dataset.course === courseName || (el.querySelector('.course-name') && el.querySelector('.course-name').textContent.trim() === courseName);
+    });
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   /* ── 연락처 자동 하이픈 ── */
   document.getElementById('f-phone').addEventListener('input', function(e) {
