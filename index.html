@@ -119,7 +119,6 @@
     .kw { font-size: 13px; font-weight: 500; color: #993556; padding: 4px 4px; }
     .kw-red { font-size: 13px; font-weight: 500; color: #993556; padding: 4px 4px; }
     
-    /* 강조바에 애니메이션 추가 */
     .highlight-bar { 
       display: flex; 
       align-items: center; 
@@ -175,12 +174,160 @@
     .cb-item { display: flex; align-items: center; gap: 10px; padding: 8px 4px; border-bottom: 1px solid #efefef; cursor: pointer; font-size: 14px; color: #1a1a1a; }
     .cb-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: #185fa5; cursor: pointer; flex-shrink: 0; }
     .cb-item span { flex: 1; line-height: 1.4; }
+
+    /* ── 탭형 과정 탐색 ── */
+    .course-tabs-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245,245,243,0.92);
+      backdrop-filter: blur(10px);
+      margin: 0 -1rem 1.4rem;
+      padding: 10px 1rem 8px;
+      border-bottom: 1px solid rgba(235,235,235,0.8);
+    }
+    .course-tabs {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .course-tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      border: 1px solid #e3e3e0;
+      background: #fff;
+      color: #666;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 8px 13px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab-btn.active {
+      background: #0d1130;
+      border-color: #0d1130;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(13,17,48,0.14);
+    }
+    .featured-section { margin-bottom: 1.6rem; }
+    .featured-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    .featured-sub {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+    }
+    .feature-mini {
+      border: 1px solid #e9e9e6;
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px 10px;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+    .feature-mini:hover {
+      transform: translateY(-1px);
+      border-color: #cfd8e6;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+    .feature-mini strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.45;
+      margin-bottom: 5px;
+    }
+    .feature-mini span {
+      display: block;
+      font-size: 11px;
+      color: #888;
+      line-height: 1.55;
+    }
+    .section.course-section.hidden-by-tab,
+    .card.hidden-by-tab,
+    .featured-section.hidden-by-tab { display: none; }
+    .card.collapsible .card-extra {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease;
+    }
+    .card.collapsible.expanded .card-extra { max-height: 620px; }
+    .card-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 16px 14px;
+    }
+    .detail-btn {
+      border: none;
+      background: #f5f5f3;
+      color: #555;
+      border-radius: 9px;
+      padding: 7px 11px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .detail-btn:hover { background: #ececea; color: #1a1a1a; }
+    .card.collapsible.expanded .detail-btn { background: #0d1130; color: #fff; }
+    .quick-reserve-btn {
+      border: 1px solid #cfd8e6;
+      background: #fff;
+      color: #0c447c;
+      border-radius: 9px;
+      padding: 7px 11px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .card.collapsible .card-desc,
+    .card.collapsible .keywords,
+    .card.collapsible .highlight-bar,
+    .card.collapsible .reserve-bar,
+    .card.collapsible .divider { margin-top: 0; }
+    #timetable-section .section-label::after {
+      content: ' — 전체 운영 블록';
+      font-weight: 400;
+      color: #bbb;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
     @media (max-width: 480px) {
       .card-body { grid-template-columns: 1fr; }
       .info-item.full { grid-column: 1; }
       .form-row { grid-template-columns: 1fr; }
       .reserve-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
       .reserve-btn { width: 100%; justify-content: center; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .course-tabs-wrap { margin-left: -1rem; margin-right: -1rem; }
+      .card-summary { flex-direction: column; align-items: stretch; }
+      .detail-btn, .quick-reserve-btn { width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -208,237 +355,601 @@
     <p>2026 여름방학 특별 과정</p>
   </div>
 
+  <div class="course-tabs-wrap">
+    <div class="course-tabs" role="tablist" aria-label="수업 카테고리">
+      <button class="tab-btn active" data-tab="all" type="button">전체</button>
+      <button class="tab-btn" data-tab="middle" type="button">중등</button>
+      <button class="tab-btn" data-tab="common" type="button">공통수학</button>
+      <button class="tab-btn" data-tab="elective" type="button">선택과목</button>
+      <button class="tab-btn" data-tab="personal" type="button">개별진도</button>
+    </div>
+  </div>
+
+  <div class="featured-section" data-featured>
+    <div class="featured-title">먼저 확인하면 좋은 대표 과정</div>
+    <div class="featured-sub">방학 중 문의가 많은 핵심 과정만 먼저 모았습니다. 필요한 과정은 탭으로 빠르게 좁혀 볼 수 있습니다.</div>
+    <div class="featured-grid">
+      <button class="feature-mini" type="button" onclick="focusCourse('개념 완성 — 공통수학 2')">
+        <strong>공통수학2 개념완성</strong>
+        <span>월–금 09:00–11:00<br>시발점</span>
+      </button>
+
+      <button class="feature-mini" type="button" onclick="focusCourse('심화 — 공통수학 2')">
+        <strong>공통수학2 심화</strong>
+        <span>일 13:00–16:00<br>고쟁이</span>
+      </button>
+
+      <button class="feature-mini" type="button" onclick="focusCourse('고등 대수 개념 완성')">
+        <strong>대수 개념완성</strong>
+        <span>월–금 11:00–13:00<br>시발점</span>
+      </button>
+
+      <button class="feature-mini" type="button" onclick="focusCourse('고등 미적분1 개념 완성')">
+        <strong>미적분1 개념완성</strong>
+        <span>월·수·금 21:00–23:00<br>시발점</span>
+      </button>
+
+      <button class="feature-mini" type="button" onclick="focusCourse('노베 도형 가이드')">
+        <strong>노베 도형가이드</strong>
+        <span>금 19:00–21:00<br>노베 도형가이드</span>
+      </button>
+    </div>
+  </div>
+
   <!-- 중등 -->
-  <div class="section">
+  <div class="section course-section" data-section="middle">
     <div class="section-label">중등</div>
-    <div class="card">
+    <div class="card collapsible" data-course="중등 개별 진도">
       <div class="card-header">
         <span class="course-name">중등 개별 진도</span>
-        <span class="badge badge-personal">개별 진도</span>
+        <span class="badge badge-personal">개별수업</span>
         <span class="badge badge-season">상시 운영</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">교재</span><span class="info-value">개인별 맞춤</span></div>
         <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">개인별 맞춤</span></div>
       </div>
-      <div class="keywords">
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('중등 개별 진도')">상담 예약</button>
+      </div>
+      <div class="card-extra"><div class="keywords">
         <span class="kw-red">#내 교재 그대로</span>
         <span class="kw-red">#내 속도대로</span>
         <span class="kw">#1:1 밀착관리</span>
       </div>
+          </div>
     </div>
-    <div class="card">
+    <div class="card collapsible" data-course="중등 개념 입문">
       <div class="card-header">
         <span class="course-name">중등 개념 입문</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="badge badge-personal">개별수업</span>
         <span class="badge badge-season">상시 운영</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">초등 · 중등 첫 개념</span></div>
         <div class="info-item"><span class="info-label">교재</span><span class="info-value">숨마쿰라우데</span></div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">주 2회 · 8주 완성</span></div>
       </div>
-      <hr class="divider">
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('중등 개념 입문')">상담 예약</button>
+      </div>
+      <div class="card-extra"><hr class="divider">
       <div class="card-desc">수업 복습 노트 제작. 하원 후 학부모님께 전송</div>
       <div class="keywords">
         <span class="kw">#첫 개념부터 탄탄하게</span>
         <span class="kw-red">#복습노트 제공</span>
         <span class="kw-red">#하원 후 학부모 전송</span>
-        <span class="kw">#8주 완성</span>
       </div>
+          </div>
     </div>
-    <div class="card">
+    <div class="card collapsible" data-course="중등 개념 완성">
       <div class="card-header">
         <span class="course-name">중등 개념 완성</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="badge badge-personal">개별수업</span>
         <span class="badge badge-season">상시 운영</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">중등 개념 1회 이상 학습</span></div>
         <div class="info-item"><span class="info-label">교재</span><span class="info-value">원리해설</span></div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">주 2회 · 8주 완성</span></div>
       </div>
-      <div class="keywords">
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('중등 개념 완성')">상담 예약</button>
+      </div>
+      <div class="card-extra"><div class="keywords">
         <span class="kw">#개념 두 번째 라운드</span>
         <span class="kw-red">#유형완성</span>
-        <span class="kw">#8주 완성</span>
       </div>
+          </div>
     </div>
   </div>
 
   <!-- 고등 브릿지 -->
-  <div class="section">
+  <div class="section course-section" data-section="elective">
     <div class="section-label">고등 브릿지</div>
-    <div class="card">
+    <div class="card collapsible" data-course="노베 도형 가이드">
       <div class="card-header">
-        <span class="course-name">노베 도형 가이드</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="course-name">노베 도형가이드</span>
+        <span class="badge badge-group">단체수업</span>
         <span class="badge badge-vacation">방학 중</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">중3 — 고3</span></div>
         <div class="info-item"><span class="info-label">교재</span><span class="info-value">노베 도형 가이드</span></div>
-        <div class="info-item"><span class="info-label">수업 목적</span><span class="info-value">수능에 필요한 모든 도형 총망라</span></div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">주 1회</span></div>
+        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">수능에 필요한 모든 도형 총망라</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">금 19:00 — 21:00</span></div>
       </div>
-      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정</div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('노베 도형 가이드')">상담 예약</button>
+      </div>
+      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정<br>현우진T 교재 수업은 사전 예약 기반으로 운영됩니다.</div>
+      <div class="card-extra">
       <div class="reserve-bar">
         <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
-        <button class="reserve-btn" onclick="scrollToForm('노베 도형 가이드')">📅 수업 예약</button>
+        <button class="reserve-btn" onclick="scrollToForm('노베 도형 가이드')">📅 상담 예약</button>
       </div>
       <div class="keywords">
         <span class="kw-red">#수능 도형 총망라</span>
         <span class="kw-red">#현우진T 공식 기관</span>
         <span class="kw">#중3-고3</span>
       </div>
+          </div>
     </div>
   </div>
 
   <!-- 고등 -->
-  <div class="section">
+  <div class="section course-section" data-section="personal">
     <div class="section-label">고등</div>
-    <div class="card">
+    <div class="card collapsible" data-course="고등 개별 진도">
       <div class="card-header">
         <span class="course-name">고등 개별 진도</span>
-        <span class="badge badge-personal">개별 진도</span>
+        <span class="badge badge-personal">개별수업</span>
         <span class="badge badge-season">상시 운영</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">교재</span><span class="info-value">개인별 맞춤</span></div>
         <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">개인별 맞춤</span></div>
       </div>
-      <div class="keywords">
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('고등 개별 진도')">상담 예약</button>
+      </div>
+      <div class="card-extra"><div class="keywords">
         <span class="kw-red">#내 교재 그대로</span>
         <span class="kw-red">#내 속도대로</span>
         <span class="kw">#1:1 밀착관리</span>
       </div>
+          </div>
     </div>
   </div>
 
   <!-- 고등 공통수학 -->
-  <div class="section">
+  <div class="section course-section" data-section="common">
     <div class="section-label">고등 공통수학</div>
-    <div class="card">
+
+    <!-- 개념 입문 — 공수1 -->
+    <div class="card collapsible" data-course="개념 입문 — 공통수학 1">
       <div class="card-header">
-        <span class="course-name">개념 입문</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="course-name">개념 입문 — 공통수학 1</span>
+        <span class="badge badge-personal">개별수업</span>
         <span class="badge badge-vacation">방학 중</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">첫 개념 시작</span></div>
-        <div class="info-item"><span class="info-label">교재</span><span class="info-value">노베 공통수학 1, 2</span></div>
-        <div class="info-item"><span class="info-label">수업 목적</span><span class="info-value">공통수학 개념 입문</span></div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">과목당 주 3회</span></div>
+        <div class="info-item"><span class="info-label">교재</span><span class="info-value">노베 공통수학 1</span></div>
+        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 1 개념 입문</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">월·수·금 13:00 — 15:00</span></div>
       </div>
-      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정</div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('개념 입문 — 공통수학 1')">상담 예약</button>
+      </div>
+      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정<br>현우진T 교재 수업은 사전 예약 기반으로 운영됩니다.</div>
+      <div class="card-extra">
       <div class="reserve-bar">
         <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
-        <button class="reserve-btn" onclick="scrollToForm('고등 공통수학 개념 입문')">📅 수업 예약</button>
+        <button class="reserve-btn" onclick="scrollToForm('고등 공통수학 1 개념 입문')">📅 상담 예약</button>
       </div>
       <div class="keywords">
         <span class="kw-red">#현우진T 공식 기관</span>
         <span class="kw">#개념 첫 단추</span>
         <span class="kw-red">#주 3회 집중</span>
       </div>
+          </div>
     </div>
-    <div class="card">
+
+    <!-- 개념 입문 — 공수2 -->
+    <div class="card collapsible" data-course="개념 입문 — 공통수학 2">
       <div class="card-header">
-        <span class="course-name">개념 완성</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="course-name">개념 입문 — 공통수학 2</span>
+        <span class="badge badge-personal">개별수업</span>
+        <span class="badge badge-vacation">방학 중</span>
+      </div>
+      <div class="card-body">
+        <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">첫 개념 시작</span></div>
+        <div class="info-item"><span class="info-label">교재</span><span class="info-value">노베 공통수학 2</span></div>
+        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 2 개념 입문</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">화·목·토 11:00 — 13:00</span></div>
+      </div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('개념 입문 — 공통수학 2')">상담 예약</button>
+      </div>
+      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정<br>현우진T 교재 수업은 사전 예약 기반으로 운영됩니다.</div>
+      <div class="card-extra">
+      <div class="reserve-bar">
+        <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
+        <button class="reserve-btn" onclick="scrollToForm('고등 공통수학 2 개념 입문')">📅 상담 예약</button>
+      </div>
+      <div class="keywords">
+        <span class="kw-red">#현우진T 공식 기관</span>
+        <span class="kw">#개념 첫 단추</span>
+        <span class="kw-red">#주 3회 집중</span>
+      </div>
+          </div>
+    </div>
+
+    <!-- 개념 완성 — 공수1 -->
+    <div class="card collapsible" data-course="개념 완성 — 공통수학 1">
+      <div class="card-header">
+        <span class="course-name">개념 완성 — 공통수학 1</span>
+        <span class="badge badge-personal">개별수업</span>
         <span class="badge badge-vacation">방학 중</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">개념 심화 완성</span></div>
-        <div class="info-item"><span class="info-label">교재</span><span class="info-value">시발점 공통수학 1, 2</span></div>
-        <div class="info-item"><span class="info-label">수업 목적</span><span class="info-value">공통수학 개념 완성</span></div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">과목당 주 3회</span></div>
+        <div class="info-item"><span class="info-label">교재</span><span class="info-value">시발점 공통수학 1</span></div>
+        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 1 개념 완성</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">월·수·금 09:00 — 11:00</span></div>
       </div>
-      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정</div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('개념 완성 — 공통수학 1')">상담 예약</button>
+      </div>
+      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정<br>현우진T 교재 수업은 사전 예약 기반으로 운영됩니다.</div>
+      <div class="card-extra">
       <div class="reserve-bar">
         <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
-        <button class="reserve-btn" onclick="scrollToForm('고등 공통수학 개념 완성')">📅 수업 예약</button>
+        <button class="reserve-btn" onclick="scrollToForm('고등 공통수학 1 개념 완성')">📅 상담 예약</button>
       </div>
       <div class="keywords">
         <span class="kw-red">#현우진T 공식 기관</span>
         <span class="kw">#개념 완전정복</span>
         <span class="kw-red">#주 3회 집중</span>
       </div>
+          </div>
     </div>
-    <div class="card">
+
+    <!-- 개념 완성 — 공수2 -->
+    <div class="card collapsible" data-course="개념 완성 — 공통수학 2">
       <div class="card-header">
-        <span class="course-name">심화</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="course-name">개념 완성 — 공통수학 2</span>
+        <span class="badge badge-group">단체수업</span>
+        <span class="badge badge-vacation">방학 중</span>
+      </div>
+      <div class="card-body">
+        <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">개념 심화 완성</span></div>
+        <div class="info-item"><span class="info-label">교재</span><span class="info-value">시발점 공통수학 2</span></div>
+        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 2 개념 완성</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">화·목·토 09:00 — 11:00</span></div>
+      </div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('개념 완성 — 공통수학 2')">상담 예약</button>
+      </div>
+      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정<br>현우진T 교재 수업은 사전 예약 기반으로 운영됩니다.</div>
+      <div class="card-extra">
+      <div class="reserve-bar">
+        <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
+        <button class="reserve-btn" onclick="scrollToForm('고등 공통수학 2 개념 완성')">📅 상담 예약</button>
+      </div>
+      <div class="keywords">
+        <span class="kw-red">#현우진T 공식 기관</span>
+        <span class="kw">#개념 완전정복</span>
+        <span class="kw-red">#주 3회 집중</span>
+      </div>
+          </div>
+    </div>
+
+    <!-- 심화 — 공수1 -->
+    <div class="card collapsible" data-course="심화 — 공통수학 1">
+      <div class="card-header">
+        <span class="course-name">심화 — 공통수학 1</span>
+        <span class="badge badge-group">단체수업</span>
       </div>
       <div class="card-body">
         <div class="info-item">
           <span class="info-label">수업 대상</span>
           <span class="info-value">중등 상위권, 고1<br><span style="font-size:12px;color:#aaa;">유형서 완료 학생 상시 입학 가능</span></span>
         </div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">과목당 주 1회</span></div>
-        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">고등 입학 전 심화 교재 완성</span></div>
         <div class="info-item full" style="padding-bottom:6px;">
           <div class="sub-label">시즌별 교재</div>
-          <div class="season-row"><span class="season-tag s1">7–9월</span><span class="season-text">고쟁이 공통수학 1, 2</span></div>
-          <div class="season-row"><span class="season-tag s2">11–12월</span><span class="season-text">블랙라벨 공통수학 1, 2</span></div>
-          <div class="season-row"><span class="season-tag s3">1–3월</span><span class="season-text">자이스토리 공통수학 1, 2</span></div>
-          <div class="season-row"><span class="season-tag s4">5–6월</span><span class="season-text">절대등급 공통수학 1, 2</span></div>
+          <div class="season-row"><span class="season-tag s1">7–9월</span><span class="season-text">고쟁이 공통수학 1</span></div>
+          <div class="season-row"><span class="season-tag s2">11–12월</span><span class="season-text">블랙라벨 공통수학 1</span></div>
+          <div class="season-row"><span class="season-tag s3">1–3월</span><span class="season-text">자이스토리 공통수학 1</span></div>
+          <div class="season-row"><span class="season-tag s4">5–6월</span><span class="season-text">절대등급 공통수학 1</span></div>
         </div>
+        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">고등 입학 전 심화 교재 완성</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">토 13:00 — 16:00</span></div>
       </div>
-      <div class="keywords">
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('심화 — 공통수학 1')">상담 예약</button>
+      </div>
+      <div class="card-extra"><div class="keywords">
         <span class="kw-red">#손글씨 풀이 제공</span>
         <span class="kw-red">#유형완성</span>
         <span class="kw">#상위권 심화</span>
       </div>
+          </div>
+    </div>
+
+    <!-- 심화 — 공수2 -->
+    <div class="card collapsible" data-course="심화 — 공통수학 2">
+      <div class="card-header">
+        <span class="course-name">심화 — 공통수학 2</span>
+        <span class="badge badge-group">단체수업</span>
+      </div>
+      <div class="card-body">
+        <div class="info-item">
+          <span class="info-label">수업 대상</span>
+          <span class="info-value">중등 상위권, 고1<br><span style="font-size:12px;color:#aaa;">유형서 완료 학생 상시 입학 가능</span></span>
+        </div>
+        <div class="info-item full" style="padding-bottom:6px;">
+          <div class="sub-label">시즌별 교재</div>
+          <div class="season-row"><span class="season-tag s1">7–9월</span><span class="season-text">고쟁이 공통수학 2</span></div>
+          <div class="season-row"><span class="season-tag s2">11–12월</span><span class="season-text">블랙라벨 공통수학 2</span></div>
+          <div class="season-row"><span class="season-tag s3">1–3월</span><span class="season-text">자이스토리 공통수학 2</span></div>
+          <div class="season-row"><span class="season-tag s4">5–6월</span><span class="season-text">절대등급 공통수학 2</span></div>
+        </div>
+        <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">고등 입학 전 심화 교재 완성</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">일 13:00 — 16:00</span></div>
+      </div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('심화 — 공통수학 2')">상담 예약</button>
+      </div>
+      <div class="card-extra"><div class="keywords">
+        <span class="kw-red">#손글씨 풀이 제공</span>
+        <span class="kw-red">#유형완성</span>
+        <span class="kw">#상위권 심화</span>
+      </div>
+          </div>
     </div>
   </div>
 
   <!-- 고등 대수 · 미적분1 -->
-  <div class="section">
+  <div class="section course-section" data-section="elective">
     <div class="section-label">고등 대수 · 미적분1</div>
-    <div class="card">
+    <div class="card collapsible" data-course="고등 대수 개념 완성">
       <div class="card-header">
         <span class="course-name">고등 대수 개념 완성</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="badge badge-group">단체수업</span>
         <span class="badge badge-vacation">방학 중</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">고2</span></div>
         <div class="info-item"><span class="info-label">교재</span><span class="info-value">시발점 대수</span></div>
         <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">내신 심화 · 수능 입문 개념</span></div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">주 3회</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">월·수·금 11:00 — 13:00</span></div>
       </div>
-      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정</div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('고등 대수 개념 완성')">상담 예약</button>
+      </div>
+      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정<br>현우진T 교재 수업은 사전 예약 기반으로 운영됩니다.</div>
+      <div class="card-extra">
       <div class="reserve-bar">
         <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
-        <button class="reserve-btn" onclick="scrollToForm('고등 대수 개념 완성')">📅 수업 예약</button>
+        <button class="reserve-btn" onclick="scrollToForm('고등 대수 개념 완성')">📅 상담 예약</button>
       </div>
       <div class="keywords">
         <span class="kw-red">#현우진T 공식 기관</span>
         <span class="kw-red">#내신+수능 동시에</span>
         <span class="kw">#주 3회 집중</span>
       </div>
+          </div>
     </div>
-    <div class="card">
+    <div class="card collapsible" data-course="고등 미적분1 개념 완성">
       <div class="card-header">
         <span class="course-name">고등 미적분1 개념 완성</span>
-        <span class="badge badge-group">단체 수업</span>
+        <span class="badge badge-group">단체수업</span>
         <span class="badge badge-vacation">방학 중</span>
       </div>
       <div class="card-body">
         <div class="info-item"><span class="info-label">수업 대상</span><span class="info-value">고2</span></div>
         <div class="info-item"><span class="info-label">교재</span><span class="info-value">시발점 미적분1</span></div>
         <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">내신 심화 · 수능 입문 개념</span></div>
-        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">주 3회</span></div>
+        <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">월·수·금 21:00 — 23:00</span></div>
       </div>
-      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정</div>
+      <div class="card-summary">
+        <button class="detail-btn" type="button" onclick="toggleCard(this)">자세히 보기</button>
+        <button class="quick-reserve-btn" type="button" onclick="scrollToForm('고등 미적분1 개념 완성')">상담 예약</button>
+      </div>
+      <div class="highlight-bar">✅ 현우진T 교재 외부 시행 기관 선정<br>현우진T 교재 수업은 사전 예약 기반으로 운영됩니다.</div>
+      <div class="card-extra">
       <div class="reserve-bar">
         <span class="reserve-text">⚠️ 현우진T 교재는 사전 예약이 필요합니다</span>
-        <button class="reserve-btn" onclick="scrollToForm('고등 미적분1 개념 완성')">📅 수업 예약</button>
+        <button class="reserve-btn" onclick="scrollToForm('고등 미적분1 개념 완성')">📅 상담 예약</button>
       </div>
       <div class="keywords">
         <span class="kw-red">#현우진T 공식 기관</span>
         <span class="kw-red">#내신+수능 동시에</span>
         <span class="kw">#주 3회 집중</span>
+      </div>
+          </div>
+    </div>
+  </div>
+
+  <!-- 시간표 -->
+  <div class="section" id="timetable-section">
+    <div class="section-label">수업 시간표</div>
+    <div style="background:#fff;border:1px solid #ebebeb;border-radius:14px;overflow:hidden;padding:14px 10px 10px;">
+      <style>
+        .tt-wrap { font-family: 'Noto Sans KR', sans-serif; }
+        .tt-wrap table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+        .tt-wrap col.tt-time { width: 34px; }
+        .tt-wrap th { font-size: 10px; font-weight: 500; color: #888; text-align: center; padding: 3px 2px 8px; border-bottom: 0.5px solid #ebebeb; }
+        .tt-wrap th.tt-th { color: transparent; }
+        .tt-wrap td.tt-tc { font-size: 8.5px; color: #bbb; text-align: right; padding-right: 4px; vertical-align: top; padding-top: 4px; white-space: nowrap; }
+        .tt-wrap td.tt-slot { border-left: 0.5px solid #f0f0f0; border-top: 0.5px solid #f0f0f0; vertical-align: top; position: relative; padding: 0; }
+        .tt-wrap td.tt-slot.tt-sun { border-right: 0.5px solid #f0f0f0; }
+        .tt-wrap tr.tt-h td { height: 30px; }
+        .tt-blk { position: absolute; inset: 2px; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2px 2px; }
+        .tt-blk .tt-t { font-size: 8px; font-weight: 500; text-align: center; line-height: 1.3; }
+        .tt-blk .tt-s { font-size: 7px; text-align: center; line-height: 1.3; margin-top: 1px; opacity: 0.72; }
+        .tt-b1 { background: #E6F1FB; color: #0C447C; }
+        .tt-b2 { background: #D6EEF7; color: #0a3d5c; }
+        .tt-t1 { background: #E1F5EE; color: #085041; }
+        .tt-t2 { background: #D4EFE3; color: #0a4535; }
+        .tt-sd { background: #F5EDD6; color: #6b4200; }
+        .tt-dg { background: #F0E6F6; color: #5b1f7a; }
+        .tt-pu { background: #EEEDFE; color: #3C3489; }
+        .tt-co { background: #FAECE7; color: #712B13; }
+        .tt-pk { background: #FBEAF0; color: #72243E; }
+        .tt-gr { background: #EFEFED; color: #5F5E5A; }
+        .tt-legend { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+        .tt-li { display: flex; align-items: center; gap: 3px; font-size: 8.5px; color: #888; }
+        .tt-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+      </style>
+      <div class="tt-wrap">
+        <div style="overflow-x:auto;">
+        <table style="min-width:300px;">
+          <colgroup>
+            <col class="tt-time">
+            <col><col><col><col><col><col><col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="tt-th"></th>
+              <th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th><th>일</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tt-h">
+              <td class="tt-tc">09:00</td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-b2" style="inset:2px;position:absolute"><span class="tt-t">공통수학2<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-b2" style="inset:2px;position:absolute"><span class="tt-t">공통수학2<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-b2" style="inset:2px;position:absolute"><span class="tt-t">공통수학2<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-b2" style="inset:2px;position:absolute"><span class="tt-t">공통수학2<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-b2" style="inset:2px;position:absolute"><span class="tt-t">공통수학2<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">10:00</td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot tt-sun" rowspan="2" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">11:00</td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-sd" style="inset:2px;position:absolute"><span class="tt-t">대수<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-sd" style="inset:2px;position:absolute"><span class="tt-t">대수<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-sd" style="inset:2px;position:absolute"><span class="tt-t">대수<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-sd" style="inset:2px;position:absolute"><span class="tt-t">대수<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-sd" style="inset:2px;position:absolute"><span class="tt-t">대수<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">12:00</td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">13:00</td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-pk" style="inset:2px;position:absolute"><span class="tt-t">공통수학1<br>심화</span><span class="tt-s">고쟁이</span></div></td>
+              <td class="tt-slot tt-sun" rowspan="3" style="position:relative"><div class="tt-blk tt-co" style="inset:2px;position:absolute"><span class="tt-t">공통수학2<br>심화</span><span class="tt-s">고쟁이</span></div></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">14:00</td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">15:00</td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">16:00</td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">17:00</td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">18:00</td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">19:00</td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-dg" style="inset:2px;position:absolute"><span class="tt-t">도형<br>가이드</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">20:00</td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">21:00</td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br>개념완성</span><span class="tt-s">시발점</span></div></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+            <tr class="tt-h">
+              <td class="tt-tc">22:00</td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot"></td>
+              <td class="tt-slot tt-sun"></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="tt-legend">
+          <div class="tt-li"><div class="tt-dot" style="background:#E6F1FB;border:0.5px solid #85B7EB"></div>공통수학1 개념완성</div>
+          <div class="tt-li"><div class="tt-dot" style="background:#D6EEF7;border:0.5px solid #6ab0d4"></div>공통수학2 개념완성</div>
+          <div class="tt-li"><div class="tt-dot" style="background:#F5EDD6;border:0.5px solid #c49a3a"></div>대수 개념완성</div>
+          <div class="tt-li"><div class="tt-dot" style="background:#EEEDFE;border:0.5px solid #AFA9EC"></div>미적분1 개념완성</div>
+          <div class="tt-li"><div class="tt-dot" style="background:#F0E6F6;border:0.5px solid #b070d0"></div>노베 도형가이드</div>
+          <div class="tt-li"><div class="tt-dot" style="background:#FBEAF0;border:0.5px solid #ED93B1"></div>공통수학1 심화</div>
+          <div class="tt-li"><div class="tt-dot" style="background:#FAECE7;border:0.5px solid #F0997B"></div>공통수학2 심화</div>
+          <div class="tt-li"><div class="tt-dot" style="background:#EFEFED;border:0.5px solid #B4B2A9"></div>개별진도</div>
+        </div>
       </div>
     </div>
   </div>
@@ -458,7 +969,7 @@
 
   <!-- 예약 폼 -->
   <div class="form-section" id="reservation-form">
-    <div class="form-title">수업 예약 신청</div>
+    <div class="form-title">상담 예약 신청</div>
     <div class="form-sub">작성해 주시면 빠르게 연락드리겠습니다.</div>
     <div class="form-card">
       <div id="form-content">
@@ -490,13 +1001,16 @@
               <label class="cb-item"><input type="checkbox" name="course" value="중등 개별 진도"><span>중등 개별 진도</span></label>
               <label class="cb-item"><input type="checkbox" name="course" value="중등 개념 입문"><span>중등 개념 입문 <span style="color:#aaa;font-size:12px;">(숨마쿰라우데)</span></span></label>
               <label class="cb-item"><input type="checkbox" name="course" value="중등 개념 완성"><span>중등 개념 완성 <span style="color:#aaa;font-size:12px;">(원리해설)</span></span></label>
-              <label class="cb-item"><input type="checkbox" name="course" value="노베 도형 가이드"><span>노베 도형 가이드 <span style="color:#aaa;font-size:12px;">(노베 도형 가이드)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="노베 도형 가이드"><span>도형가이드 <span style="color:#aaa;font-size:12px;">(금 19-21시)</span></span></label>
               <label class="cb-item"><input type="checkbox" name="course" value="고등 개별 진도"><span>고등 개별 진도</span></label>
-              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 개념 입문"><span>고등 공통수학 개념 입문 <span style="color:#aaa;font-size:12px;">(노베 공통수학)</span></span></label>
-              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 개념 완성"><span>고등 공통수학 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 공통수학)</span></span></label>
-              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 심화"><span>고등 공통수학 심화</span></label>
-              <label class="cb-item"><input type="checkbox" name="course" value="고등 대수 개념 완성"><span>고등 대수 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 대수)</span></span></label>
-              <label class="cb-item" style="border-bottom:none;"><input type="checkbox" name="course" value="고등 미적분1 개념 완성"><span>고등 미적분1 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 미적분1)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 1 개념 입문"><span>고등 공통수학 1 개념 입문 <span style="color:#aaa;font-size:12px;">(노베 공통수학 1 · 월수금 13-15시)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 2 개념 입문"><span>고등 공통수학 2 개념 입문 <span style="color:#aaa;font-size:12px;">(노베 공통수학 2 · 화목토 11-13시)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 1 개념 완성"><span>고등 공통수학 1 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 공통수학 1 · 월수금 9-11시)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 2 개념 완성"><span>고등 공통수학 2 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 공통수학 2 · 화목토 9-11시)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 1 심화"><span>고등 공통수학 1 심화 <span style="color:#aaa;font-size:12px;">(고쟁이 · 토 13-16시)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 공통수학 2 심화"><span>고등 공통수학 2 심화 <span style="color:#aaa;font-size:12px;">(고쟁이 · 일 13-16시)</span></span></label>
+              <label class="cb-item"><input type="checkbox" name="course" value="고등 대수 개념 완성"><span>고등 대수 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 대수 · 월수금 11-13시)</span></span></label>
+              <label class="cb-item" style="border-bottom:none;"><input type="checkbox" name="course" value="고등 미적분1 개념 완성"><span>고등 미적분1 개념 완성 <span style="color:#aaa;font-size:12px;">(시발점 미적분1 · 월수금 21-23시)</span></span></label>
             </div>
           </div>
         </div>
@@ -547,7 +1061,6 @@
     p0.style.opacity = 0;
     p1.style.opacity = 0;
 
-    // 1단계: TEUIDA MATH + 버팀의 끝에서 동시 등장
     timers.push(setTimeout(function() {
       if (skipped) return;
       wordmark.style.opacity = 1;
@@ -555,21 +1068,18 @@
       d0.classList.add('active');
     }, 300));
 
-    // 2단계: 버팀의 끝에서 사라짐
     timers.push(setTimeout(function() {
       if (skipped) return;
       p0.style.opacity = 0;
       d0.classList.remove('active');
     }, 1600));
 
-    // 3단계: 마침내, 트이다 등장
     timers.push(setTimeout(function() {
       if (skipped) return;
       p1.style.opacity = 1;
       d1.classList.add('active');
     }, 1900));
 
-    // 4단계: 인트로 종료
     timers.push(setTimeout(function() {
       if (skipped) return;
       finishIntro();
@@ -593,7 +1103,59 @@
 
   runIntro();
 
-  /* ── 연락처 자동 하이픈 추가 ── */
+
+  /* ── 탭 필터 · 카드 펼치기 ── */
+  function setActiveTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.tab === tab);
+    });
+
+    document.querySelectorAll('.course-section').forEach(function(section) {
+      var show = tab === 'all' || section.dataset.section === tab || (tab === 'personal' && section.dataset.section === 'middle');
+      // 개인진도 탭에서는 개별진도 카드만 별도로 처리
+      if (tab === 'personal') {
+        show = section.querySelector('[data-course*="개별 진도"]') !== null || section.dataset.section === 'personal';
+      }
+      section.classList.toggle('hidden-by-tab', !show);
+    });
+
+    document.querySelectorAll('.card.collapsible').forEach(function(card) {
+      var course = card.dataset.course || '';
+      var visible = true;
+      if (tab === 'personal') visible = course.indexOf('개별 진도') > -1;
+      card.classList.toggle('hidden-by-tab', !visible);
+    });
+
+    var featured = document.querySelector('[data-featured]');
+    if (featured) featured.classList.toggle('hidden-by-tab', tab !== 'all');
+  }
+
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setActiveTab(btn.dataset.tab);
+    });
+  });
+
+  function toggleCard(btn) {
+    var card = btn.closest('.card');
+    var expanded = card.classList.toggle('expanded');
+    btn.textContent = expanded ? '접기' : '자세히 보기';
+  }
+
+  function focusCourse(courseName) {
+    setActiveTab('all');
+    var card = Array.from(document.querySelectorAll('.card.collapsible')).find(function(el) {
+      return el.dataset.course === courseName;
+    });
+    if (!card) return;
+    card.classList.add('expanded');
+    var btn = card.querySelector('.detail-btn');
+    if (btn) btn.textContent = '접기';
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+
+  /* ── 연락처 자동 하이픈 ── */
   document.getElementById('f-phone').addEventListener('input', function(e) {
     this.value = this.value
       .replace(/[^0-9]/g, '')
