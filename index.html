@@ -120,19 +120,20 @@
     .kw { font-size: 13px; font-weight: 500; color: #993556; padding: 4px 4px; }
     .kw-red { font-size: 13px; font-weight: 500; color: #993556; padding: 4px 4px; }
     
-    .highlight-bar { 
-      display: flex; 
-      align-items: center; 
-      gap: 6px; 
-      background: #fef6e8; 
-      border-radius: 10px; 
-      padding: 8px 12px; 
-      margin: 0 16px 14px; 
-      font-size: 12px; 
-      font-weight: 600; 
+    .highlight-bar {
+      display: block;
+      background: #fef6e8;
+      border-radius: 10px;
+      padding: 9px 12px;
+      margin: 0 16px 14px;
+      font-size: 12px;
+      font-weight: 600;
       color: #9a5c00;
-      animation: pulse 2s infinite;
+      line-height: 1.55;
+      white-space: normal;
     }
+    .highlight-line-main { display: block; }
+    .highlight-line-sub { display: block; padding-left: 1.55em; }
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.01); background: #fff2d9; }
@@ -370,7 +371,7 @@
 </div>
 </div>
 <div class="featured-section" data-featured="">
-<div class="featured-title">✨먼저 확인하면 좋은 대표 과정</div>
+<div class="featured-title">✨ 먼저 확인하면 좋은 대표 과정</div>
 <div class="featured-sub">방학 중 문의가 많은 핵심 과정만 먼저 모았습니다.</div>
 <div class="featured-grid">
 <button class="feature-mini" onclick="focusCourse('개념 완성 — 공통수학 2')" type="button">
@@ -452,7 +453,7 @@
 <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">수능에 필요한 모든 도형 총망라</span></div>
 <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">금 19:00 — 21:00</span></div>
 </div>
-<div class="highlight-bar">📌 현우진T 교재 외부 시행 기관 선정<br/><span style="display:inline-block;padding-left:1.35em;">본 수업 교재는 사전 예약이 필요합니다.</span></div>
+<div class="highlight-bar"><div class="highlight-line-main">📌 현우진T 교재 외부 시행 기관 선정</div><div class="highlight-line-sub">본 수업 교재는 사전 예약이 필요합니다.</div></div>
 <div class="card-cta"><button class="card-consult-btn" onclick="scrollToForm('도형가이드')" type="button">📅 상담 예약</button></div><div class="keywords"><span class="kw-red">#수능 도형 총망라</span><span class="kw-red">#현우진T 공식 기관</span><span class="kw">#금요일 저녁</span></div>
 </div>
 </div>
@@ -488,7 +489,7 @@
 <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 1 개념 입문</span></div>
 <div class="info-item"><span class="info-label">수업 일정</span><span class="info-value">개인별 맞춤</span></div>
 </div>
-<div class="highlight-bar">📌 현우진T 교재 외부 시행 기관 선정<br/><span style="display:inline-block;padding-left:1.35em;">본 수업 교재는 사전 예약이 필요합니다.</span></div>
+<div class="highlight-bar"><div class="highlight-line-main">📌 현우진T 교재 외부 시행 기관 선정</div><div class="highlight-line-sub">본 수업 교재는 사전 예약이 필요합니다.</div></div>
 <div class="card-cta"><button class="card-consult-btn" onclick="scrollToForm('개념 입문 — 공통수학 1')" type="button">📅 상담 예약</button></div><div class="keywords"><span class="kw-red">#현우진T 공식 기관</span><span class="kw">#개념 첫 단추</span><span class="kw">#개인별 맞춤</span></div>
 </div>
 <!-- 개념 입문 — 공수2 -->
@@ -504,7 +505,7 @@
 <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 2 개념 입문</span></div>
 <div class="info-item"><span class="info-label">수업 일정</span><span class="info-value">개인별 맞춤</span></div>
 </div>
-<div class="highlight-bar">📌 현우진T 교재 외부 시행 기관 선정<br/><span style="display:inline-block;padding-left:1.35em;">본 수업 교재는 사전 예약이 필요합니다.</span></div>
+<div class="highlight-bar"><div class="highlight-line-main">📌 현우진T 교재 외부 시행 기관 선정</div><div class="highlight-line-sub">본 수업 교재는 사전 예약이 필요합니다.</div></div>
 <div class="card-cta"><button class="card-consult-btn" onclick="scrollToForm('개념 입문 — 공통수학 2')" type="button">📅 상담 예약</button></div><div class="keywords"><span class="kw-red">#현우진T 공식 기관</span><span class="kw">#개념 첫 단추</span><span class="kw">#개인별 맞춤</span></div>
 </div>
 <!-- 개념 완성 — 공수1 -->
@@ -520,7 +521,7 @@
 <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 1 개념 완성</span></div>
 <div class="info-item"><span class="info-label">수업 일정</span><span class="info-value">개인별 맞춤</span></div>
 </div>
-<div class="highlight-bar">📌 현우진T 교재 외부 시행 기관 선정<br/><span style="display:inline-block;padding-left:1.35em;">본 수업 교재는 사전 예약이 필요합니다.</span></div>
+<div class="highlight-bar"><div class="highlight-line-main">📌 현우진T 교재 외부 시행 기관 선정</div><div class="highlight-line-sub">본 수업 교재는 사전 예약이 필요합니다.</div></div>
 <div class="card-cta"><button class="card-consult-btn" onclick="scrollToForm('개념 완성 — 공통수학 1')" type="button">📅 상담 예약</button></div><div class="keywords"><span class="kw-red">#현우진T 공식 기관</span><span class="kw">#개념 완전정복</span><span class="kw">#개인별 맞춤</span></div>
 </div>
 <!-- 개념 완성 — 공수2 -->
@@ -536,7 +537,7 @@
 <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">공통수학 2 개념 완성</span></div>
 <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">월·화·수·목·금 09:00 — 11:00</span></div>
 </div>
-<div class="highlight-bar">📌 현우진T 교재 외부 시행 기관 선정<br/><span style="display:inline-block;padding-left:1.35em;">본 수업 교재는 사전 예약이 필요합니다.</span></div>
+<div class="highlight-bar"><div class="highlight-line-main">📌 현우진T 교재 외부 시행 기관 선정</div><div class="highlight-line-sub">본 수업 교재는 사전 예약이 필요합니다.</div></div>
 <div class="card-cta"><button class="card-consult-btn" onclick="scrollToForm('개념 완성 — 공통수학 2')" type="button">📅 상담 예약</button></div><div class="keywords"><span class="kw-red">#현우진T 공식 기관</span><span class="kw">#개념 완전정복</span><span class="kw-red">#평일 오전 집중</span></div>
 </div>
 <!-- 심화 — 공수1 -->
@@ -601,7 +602,7 @@
 <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">내신 심화 · 수능 입문 개념</span></div>
 <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">월·화·수·목·금 11:00 — 13:00</span></div>
 </div>
-<div class="highlight-bar">📌 현우진T 교재 외부 시행 기관 선정<br/><span style="display:inline-block;padding-left:1.35em;">본 수업 교재는 사전 예약이 필요합니다.</span></div>
+<div class="highlight-bar"><div class="highlight-line-main">📌 현우진T 교재 외부 시행 기관 선정</div><div class="highlight-line-sub">본 수업 교재는 사전 예약이 필요합니다.</div></div>
 <div class="card-cta"><button class="card-consult-btn" onclick="scrollToForm('고등 대수 개념 완성')" type="button">📅 상담 예약</button></div><div class="keywords"><span class="kw-red">#현우진T 공식 기관</span><span class="kw-red">#내신+수능 동시에</span><span class="kw">#평일 오전 집중</span></div>
 </div>
 <div class="card" data-course="고등 미적분1 개념 완성">
@@ -616,7 +617,7 @@
 <div class="info-item full"><span class="info-label">수업 목적</span><span class="info-value">내신 심화 · 수능 입문 개념</span></div>
 <div class="info-item"><span class="info-label">수업 일정</span><span class="freq info-value">토·일 10:00 — 12:00<br/>월·수·금 21:00 — 23:00</span></div>
 </div>
-<div class="highlight-bar">📌 현우진T 교재 외부 시행 기관 선정<br/><span style="display:inline-block;padding-left:1.35em;">본 수업 교재는 사전 예약이 필요합니다.</span></div>
+<div class="highlight-bar"><div class="highlight-line-main">📌 현우진T 교재 외부 시행 기관 선정</div><div class="highlight-line-sub">본 수업 교재는 사전 예약이 필요합니다.</div></div>
 <div class="card-cta"><button class="card-consult-btn" onclick="scrollToForm('고등 미적분1 개념 완성')" type="button">📅 상담 예약</button></div><div class="keywords"><span class="kw-red">#현우진T 공식 기관</span><span class="kw-red">#내신+수능 동시에</span><span class="kw">#주말+야간 운영</span></div>
 </div>
 </div>
