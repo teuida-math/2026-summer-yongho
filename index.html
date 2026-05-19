@@ -338,6 +338,26 @@
       .featured-grid { grid-template-columns: 1fr; }
       .course-tabs-wrap { margin-left: -1rem; margin-right: -1rem; }
       }
+
+    /* ── 대표과정 팝업 ── */
+    @keyframes popupIn {
+      from { opacity:0; transform: scale(0.92) translateY(16px); }
+      to   { opacity:1; transform: scale(1) translateY(0); }
+    }
+    #featured-popup-overlay { display:none; }
+    #featured-popup-overlay.open {
+      display:flex !important;
+    }
+    .popup-course-btn {
+      width:100%; display:flex; align-items:center; justify-content:space-between;
+      background:#f8f8f7; border:1px solid #ebebeb; border-radius:12px;
+      padding:12px 14px; font-family:inherit; cursor:pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+      text-align:left;
+    }
+    .popup-course-btn:hover { background:#eef5fc; border-color:#b5d4f4; transform:translateY(-1px); }
+    .pcb-name { font-size:14px; font-weight:600; color:#1a1a1a; }
+    .pcb-badge { font-size:11px; font-weight:600; padding:3px 8px; border-radius:20px; white-space:nowrap; }
   
     .tt-share-wrap {
       display: flex;
@@ -489,7 +509,7 @@
 <button class="tab-btn" data-tab="personal" type="button">개별진도</button>
 </div>
 </div>
-<div class="featured-section" data-featured="">
+<div class="featured-section" data-featured="" style="display:none;">
 <div class="featured-title">✨ 먼저 확인하면 좋은 대표 과정</div>
 <div class="featured-sub">방학 중 문의가 많은 핵심 과정만 먼저 모았습니다.</div>
 <div class="featured-grid">
@@ -518,6 +538,59 @@
 <span>7/20 — 8/14 · 4주<br/>화·목 17:00–20:00<br/>고쟁이 Step 1·2</span>
 </button>
 </div>
+</div>
+
+<!-- ── 대표 과정 팝업 ── -->
+<div id="featured-popup-overlay" style="
+  display:none; position:fixed; inset:0; z-index:8000;
+  background:rgba(13,17,48,0.55); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center; padding:1.5rem;
+">
+  <div style="
+    background:#fff; border-radius:20px; width:100%; max-width:420px;
+    padding:24px 20px 20px; box-shadow:0 24px 60px rgba(0,0,0,0.18);
+    animation: popupIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  ">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+      <div style="font-size:15px; font-weight:700; color:#1a1a1a;">✨ 대표 과정</div>
+      <button onclick="closePopup()" style="
+        border:none; background:none; font-size:18px; color:#aaa;
+        cursor:pointer; padding:4px 8px; line-height:1;
+      ">✕</button>
+    </div>
+    <div style="font-size:12px; color:#aaa; margin-bottom:16px;">문의가 많은 핵심 과정을 먼저 확인하세요.</div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <button class="popup-course-btn" onclick="popupFocus('중등 2-2 심화')">
+        <span class="pcb-name">중등 2-2 심화</span>
+        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      </button>
+      <button class="popup-course-btn" onclick="popupFocus('개념 완성 — 공통수학 2')">
+        <span class="pcb-name">공통수학2 개념완성</span>
+        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      </button>
+      <button class="popup-course-btn" onclick="popupFocus('심화 — 공통수학 2')">
+        <span class="pcb-name">공통수학2 심화</span>
+        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 시즌</span>
+      </button>
+      <button class="popup-course-btn" onclick="popupFocus('고등 대수 개념 완성')">
+        <span class="pcb-name">대수 개념완성</span>
+        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      </button>
+      <button class="popup-course-btn" onclick="popupFocus('고등 미적분1 개념 완성')">
+        <span class="pcb-name">미적분1 개념완성</span>
+        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      </button>
+      <button class="popup-course-btn" onclick="popupFocus('도형가이드')">
+        <span class="pcb-name">도형가이드</span>
+        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      </button>
+    </div>
+    <button onclick="closePopup()" style="
+      width:100%; margin-top:16px; padding:12px;
+      background:#0d1130; color:#fff; border:none; border-radius:10px;
+      font-size:14px; font-weight:600; cursor:pointer; font-family:inherit;
+    ">전체 과정 보기</button>
+  </div>
 </div>
 <!-- 중등 -->
 <div class="section course-section" data-section="middle">
@@ -710,7 +783,7 @@
 <div class="card-header">
 <span class="course-name">심화 — 공통수학 2</span>
 <span class="badge badge-group">단체수업</span>
-</div>
+<span class="badge badge-season">시즌 운영</span></div>
 <div class="card-body">
 <div class="info-item">
 <span class="info-label">수업 대상</span>
@@ -1100,8 +1173,29 @@
     setTimeout(function() {
       intro.style.display = 'none';
       document.getElementById('main').classList.add('visible');
+      setTimeout(openPopup, 400);
     }, 700);
   }
+
+  function openPopup() {
+    var overlay = document.getElementById('featured-popup-overlay');
+    overlay.classList.add('open');
+  }
+
+  function closePopup() {
+    var overlay = document.getElementById('featured-popup-overlay');
+    overlay.classList.remove('open');
+  }
+
+  function popupFocus(courseName) {
+    closePopup();
+    setTimeout(function() { focusCourse(courseName); }, 300);
+  }
+
+  // 오버레이 배경 클릭 시 닫기
+  document.getElementById('featured-popup-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
 
   function skipIntro() {
     skipped = true;
