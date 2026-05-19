@@ -1241,6 +1241,7 @@
   document.querySelectorAll('.tab-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       setActiveTab(btn.dataset.tab);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 
