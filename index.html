@@ -294,14 +294,6 @@
     .section.course-section.hidden-by-tab,
     .card.hidden-by-tab,
     .featured-section.hidden-by-tab { display: none; }
-    #timetable-section .section-label::after {
-      content: ' — 전체 운영 블록';
-      font-weight: 400;
-      color: #bbb;
-      letter-spacing: 0;
-      text-transform: none;
-    }
-
     @media (max-width: 480px) {
       .card-body { grid-template-columns: 1fr; }
       .info-item.full { grid-column: 1; }
@@ -340,143 +332,69 @@
       }
 
     /* ── 대표과정 팝업 ── */
-    @keyframes popupIn {
-      from { opacity:0; transform: scale(0.92) translateY(16px); }
-      to   { opacity:1; transform: scale(1) translateY(0); }
-    }
-    #featured-popup-overlay { display:none; }
-    #featured-popup-overlay.open {
-      display:flex !important;
-    }
-    .popup-course-btn {
-      width:100%; display:flex; align-items:center; justify-content:space-between;
-      background:#f8f8f7; border:1px solid #ebebeb; border-radius:12px;
-      padding:12px 14px; font-family:inherit; cursor:pointer;
-      transition: background 0.15s, border-color 0.15s, transform 0.15s;
-      text-align:left;
-    }
-    .popup-course-btn:hover { background:#eef5fc; border-color:#b5d4f4; transform:translateY(-1px); }
-    .pcb-name { font-size:14px; font-weight:600; color:#1a1a1a; }
-    .pcb-badge { font-size:11px; font-weight:600; padding:3px 8px; border-radius:20px; white-space:nowrap; }
+    @keyframes popupIn{from{opacity:0;transform:scale(.94) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    #featured-popup-overlay{display:none;position:fixed;inset:0;z-index:8000;background:rgba(13,17,48,.48);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1.5rem;}
+    #featured-popup-overlay.open{display:flex;}
+    .featured-popup{width:100%;max-width:430px;background:#fff;border-radius:22px;padding:23px 20px 19px;box-shadow:0 24px 60px rgba(0,0,0,.18);animation:popupIn .34s cubic-bezier(.34,1.56,.64,1) forwards;}
+    .popup-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+    .popup-kicker{font-size:11px;font-weight:900;letter-spacing:.12em;color:#185fa5;margin-bottom:5px;}
+    .popup-title{font-size:18px;font-weight:900;color:#171717;line-height:1.35;letter-spacing:-.02em;}
+    .popup-sub{font-size:12px;color:#888;line-height:1.65;margin-top:5px;}
+    .popup-close{border:0;background:#f5f5f3;color:#999;border-radius:50%;width:30px;height:30px;font-size:16px;cursor:pointer;line-height:1;flex:0 0 auto;}
+    .popup-course-list{display:grid;gap:8px;}
+    .popup-course-btn{width:100%;border:1px solid #e8e8e4;background:#fbfbfa;border-radius:14px;padding:12px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;cursor:pointer;transition:.15s ease;font-family:inherit;}
+    .popup-course-btn:hover{background:#eef5fc;border-color:#cbddee;}
+    .popup-course-main{min-width:0;}
+    .popup-course-name{display:block;font-size:14px;font-weight:900;color:#171717;line-height:1.45;}
+    .popup-course-badge{font-size:10.5px;font-weight:900;border-radius:999px;padding:4px 8px;white-space:nowrap;flex:0 0 auto;}
+    .pb-blue{background:#eef5fc;color:#14558f;}
+    .pb-purple{background:#f1efff;color:#3c3489;}
+    .pb-green{background:#edf7ef;color:#24550f;}
+    .pb-orange{background:#fff3df;color:#7b4c04;}
+    .popup-all-btn{width:100%;margin-top:14px;border:0;background:#0d1130;color:#fff;border-radius:13px;padding:12px;font-size:14px;font-weight:900;cursor:pointer;font-family:inherit;}
   
-    .tt-share-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 14px;
-    }
-    .tt-share-btn {
-      min-width: 170px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 13px;
-      padding: 11px 16px;
-      border-radius: 12px;
-    }
-    .tt-share-icon {
-      font-size: 16px;
-      line-height: 1;
-    }
-
-
-    /* ── 시간표 공유 액션 버튼 ── */
-    .tt-share-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 14px;
-      padding: 0 2px;
-    }
-    .tt-share-btn.tt-share-action {
-      width: min(100%, 320px);
-      border: 0;
-      background: transparent;
-      color: #1a1a1a;
-      border-radius: 14px;
-      padding: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 14px;
-      font-family: inherit;
-      cursor: pointer;
-      text-align: left;
-      transition: background 0.15s, transform 0.15s;
-    }
-    .tt-share-btn.tt-share-action:hover {
-      background: rgba(255,255,255,0.65);
-      transform: none;
-    }
-    .tt-share-btn.tt-share-action:active {
-      transform: translateY(1px);
-    }
-    .tt-share-icon-box {
-      width: 44px;
-      height: 44px;
-      border: 1px solid #e1e1de;
-      border-radius: 12px;
-      background: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #0d1130;
-      flex: 0 0 auto;
-    }
-    .tt-share-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-      align-items: center;
-    }
-    .tt-share-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #1a1a1a;
-      line-height: 1.35;
-    }
-    .tt-share-sub {
-      font-size: 12px;
-      color: #777;
-      line-height: 1.4;
-    }
-
-    /* ── 시간표 공유 버튼 실제 중앙 정렬 보정 ── */
-    .tt-share-wrap {
-      display: flex !important;
-      justify-content: center !important;
-      width: 100% !important;
-      margin-top: 14px !important;
-      padding: 0 !important;
-    }
-    .tt-share-btn.tt-share-action {
-      width: min(100%, 320px) !important;
-      display: grid !important;
-      grid-template-columns: 44px 1fr 44px !important;
-      align-items: center !important;
-      justify-content: center !important;
-      column-gap: 12px !important;
-      padding: 10px 12px !important;
-      text-align: center !important;
-    }
-    .tt-share-icon-box {
-      grid-column: 1 !important;
-      justify-self: center !important;
-    }
-    .tt-share-text {
-      grid-column: 2 !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      width: 100% !important;
-    }
-    .tt-share-title,
-    .tt-share-sub {
-      display: block !important;
-      width: 100% !important;
-      text-align: center !important;
-    }
-
+  .section-head{margin-bottom:11px;}
+  .section-kicker{font-size:11px;font-weight:700;color:#9b9b96;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+  .section-title{font-size:20px;font-weight:800;letter-spacing:-.025em;color:#1a1a1a;}
+  .section-desc{font-size:13px;color:#777;line-height:1.7;margin-top:5px;}
+  .timetable-card{background:#fff;border:1px solid #ebebeb;border-radius:19px;padding:14px 12px 16px;overflow:hidden;}
+  #timetable-capture{background:#fff;padding:10px 8px 14px;border-radius:14px;}
+  .tt-brand{text-align:center;padding:4px 0 12px;}
+  .tt-brand-title{font-size:15px;font-weight:900;color:#0d1130;}
+  .tt-brand-sub{font-size:11px;color:#999;margin-top:3px;}
+  .tt-wrap{overflow-x:auto;}
+  .tt-wrap table{width:100%;min-width:320px;table-layout:fixed;border-collapse:collapse;}
+  .tt-wrap col.tt-time{width:35px;}
+  .tt-wrap th{font-size:10px;color:#888;font-weight:800;padding:4px 2px 8px;border-bottom:1px solid #eee;}
+  .tt-wrap .tt-th{color:transparent;}
+  .tt-wrap td{height:30px;}
+  .tt-tc{font-size:8.5px;color:#aaa;text-align:right;vertical-align:top;padding:4px 4px 0 0;white-space:nowrap;}
+  .tt-slot{border-left:1px solid #f1f1ef;border-top:1px solid #f1f1ef;position:relative;vertical-align:top;}
+  .tt-sun{border-right:1px solid #f1f1ef;}
+  .tt-blk{position:absolute;inset:2px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px;text-align:center;}
+  .tt-blk .tt-t{font-size:7.3px;font-weight:900;line-height:1.28;word-break:keep-all;}
+  .tt-blk .tt-s{font-size:6.8px;line-height:1.25;opacity:.72;margin-top:1px;}
+  .tt-b1{background:#E6F1FB;color:#0C447C;}
+  .tt-b2{background:#d6eef7;color:#0a3d5c;}
+  .tt-pk{background:#fbeaf0;color:#72243e;}
+  .tt-co{background:#faece7;color:#712b13;}
+  .tt-t1{background:#e1f5ee;color:#085041;}
+  .tt-t2{background:#D4EFE3;color:#0a4535;}
+  .tt-sd{background:#F5EDD6;color:#6b4200;}
+  .tt-dg{background:#f0e6f6;color:#5b1f7a;}
+  .tt-pu{background:#eeedfe;color:#3c3489;}
+  .tt-gr{background:#EFEFED;color:#5F5E5A;}
+  .tt-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .tt-li{display:flex;align-items:center;gap:4px;font-size:8.5px;color:#777;}
+  .tt-dot{width:8px;height:8px;border-radius:3px;}
+  .tt-share-wrap{display:flex!important;justify-content:center!important;width:100%!important;margin-top:14px!important;padding:0!important;}
+  .tt-share-btn.tt-share-action{width:min(100%,320px)!important;border:0;background:transparent;color:#1a1a1a;border-radius:14px;display:grid!important;grid-template-columns:44px 1fr 44px!important;align-items:center!important;column-gap:12px!important;padding:10px 12px!important;font-family:inherit;cursor:pointer;text-align:center!important;transition:background .15s,transform .15s;}
+  .tt-share-btn.tt-share-action:hover{background:rgba(255,255,255,.65);}
+  .tt-share-btn.tt-share-action:active{transform:translateY(1px);}
+  .tt-share-icon-box{width:44px;height:44px;border:1px solid #e1e1de;border-radius:12px;background:#fff;display:inline-flex;align-items:center;justify-content:center;color:#0d1130;grid-column:1!important;justify-self:center!important;}
+  .tt-share-text{display:flex;flex-direction:column;gap:2px;align-items:center!important;justify-content:center!important;text-align:center!important;width:100%!important;grid-column:2!important;}
+  .tt-share-title{display:block!important;font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.35;width:100%!important;text-align:center!important;}
+  .tt-share-sub{display:block!important;font-size:12px;color:#777;line-height:1.4;width:100%!important;text-align:center!important;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script></head>
 <body>
@@ -541,55 +459,43 @@
 </div>
 
 <!-- ── 대표 과정 팝업 ── -->
-<div id="featured-popup-overlay" style="
-  display:none; position:fixed; inset:0; z-index:8000;
-  background:rgba(13,17,48,0.55); backdrop-filter:blur(4px);
-  align-items:center; justify-content:center; padding:1.5rem;
-">
-  <div style="
-    background:#fff; border-radius:20px; width:100%; max-width:420px;
-    padding:24px 20px 20px; box-shadow:0 24px 60px rgba(0,0,0,0.18);
-    animation: popupIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
-  ">
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-      <div style="font-size:15px; font-weight:700; color:#1a1a1a;">✨ 대표 과정</div>
-      <button onclick="closePopup()" style="
-        border:none; background:none; font-size:18px; color:#aaa;
-        cursor:pointer; padding:4px 8px; line-height:1;
-      ">✕</button>
+<div id="featured-popup-overlay" aria-hidden="true">
+  <div class="featured-popup" role="dialog" aria-modal="true" aria-labelledby="featured-popup-title">
+    <div class="popup-head">
+      <div>
+        <div class="popup-kicker">YONGHO SUMMER</div>
+        <div class="popup-title" id="featured-popup-title">용호점 방학 핵심 수업</div>
+        <div class="popup-sub">이번 시즌 문의가 많은 수업만 먼저 확인하세요.</div>
+      </div>
+      <button class="popup-close" onclick="closePopup()" type="button" aria-label="팝업 닫기">×</button>
     </div>
-    <div style="font-size:12px; color:#aaa; margin-bottom:16px;">문의가 많은 핵심 과정을 먼저 확인하세요.</div>
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <button class="popup-course-btn" onclick="popupFocus('중등 2-2 심화')">
-        <span class="pcb-name">중등 2-2 심화</span>
-        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+    <div class="popup-course-list">
+      <button class="popup-course-btn" onclick="popupFocus('중등 2-2 심화')" type="button">
+        <span class="popup-course-main"><span class="popup-course-name">중등 2-2 심화</span></span>
+        <span class="popup-course-badge pb-green">단체 · 방학</span>
       </button>
-      <button class="popup-course-btn" onclick="popupFocus('개념 완성 — 공통수학 2')">
-        <span class="pcb-name">공통수학2 개념완성</span>
-        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      <button class="popup-course-btn" onclick="popupFocus('개념 완성 — 공통수학 2')" type="button">
+        <span class="popup-course-main"><span class="popup-course-name">공통수학2 개념완성</span></span>
+        <span class="popup-course-badge pb-blue">단체 · 방학</span>
       </button>
-      <button class="popup-course-btn" onclick="popupFocus('심화 — 공통수학 2')">
-        <span class="pcb-name">공통수학2 심화</span>
-        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 시즌</span>
+      <button class="popup-course-btn" onclick="popupFocus('심화 — 공통수학 2')" type="button">
+        <span class="popup-course-main"><span class="popup-course-name">공통수학2 심화</span></span>
+        <span class="popup-course-badge pb-blue">단체 · 시즌</span>
       </button>
-      <button class="popup-course-btn" onclick="popupFocus('고등 대수 개념 완성')">
-        <span class="pcb-name">대수 개념완성</span>
-        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      <button class="popup-course-btn" onclick="popupFocus('고등 대수 개념 완성')" type="button">
+        <span class="popup-course-main"><span class="popup-course-name">대수 개념완성</span></span>
+        <span class="popup-course-badge pb-purple">단체 · 방학</span>
       </button>
-      <button class="popup-course-btn" onclick="popupFocus('고등 미적분1 개념 완성')">
-        <span class="pcb-name">미적분1 개념완성</span>
-        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      <button class="popup-course-btn" onclick="popupFocus('고등 미적분1 개념 완성')" type="button">
+        <span class="popup-course-main"><span class="popup-course-name">미적분1 개념완성</span></span>
+        <span class="popup-course-badge pb-purple">단체 · 방학</span>
       </button>
-      <button class="popup-course-btn" onclick="popupFocus('도형가이드')">
-        <span class="pcb-name">도형가이드</span>
-        <span class="pcb-badge" style="background:#e8f1fb;color:#1a5fa5;">단체 · 방학</span>
+      <button class="popup-course-btn" onclick="popupFocus('도형가이드')" type="button">
+        <span class="popup-course-main"><span class="popup-course-name">도형가이드</span></span>
+        <span class="popup-course-badge pb-orange">단체 · 방학</span>
       </button>
     </div>
-    <button onclick="closePopup()" style="
-      width:100%; margin-top:16px; padding:12px;
-      background:#0d1130; color:#fff; border:none; border-radius:10px;
-      font-size:14px; font-weight:600; cursor:pointer; font-family:inherit;
-    ">전체 과정 보기</button>
+    <button class="popup-all-btn" onclick="closePopup()" type="button">전체 과정 보기</button>
   </div>
 </div>
 <!-- 중등 -->
@@ -838,74 +744,8 @@
 </div>
 </div>
 <!-- 시간표 -->
-<div class="section" id="timetable-section"><div class="tt-title-row"><div class="section-label">수업 시간표</div></div>
-<div class="tt-capture" id="timetable-capture"><div class="tt-capture-brand" style="text-align:center; padding: 8px 0 12px;"><div class="brand-title">트이다 수학 — 용호점 운영 시간표</div><div class="brand-sub">2026 여름방학 특강</div></div>
-<style>
-        .tt-wrap { font-family: 'Noto Sans KR', sans-serif; }
-        .tt-wrap table { border-collapse: collapse; width: 100%; table-layout: fixed; }
-        .tt-wrap col.tt-time { width: 34px; }
-        .tt-wrap th { font-size: 10px; font-weight: 500; color: #888; text-align: center; padding: 3px 2px 8px; border-bottom: 0.5px solid #ebebeb; }
-        .tt-wrap th.tt-th { color: transparent; }
-        .tt-wrap td.tt-tc { font-size: 8.5px; color: #bbb; text-align: right; padding-right: 4px; vertical-align: top; padding-top: 4px; white-space: nowrap; }
-        .tt-wrap td.tt-slot { border-left: 0.5px solid #f0f0f0; border-top: 0.5px solid #f0f0f0; vertical-align: top; position: relative; padding: 0; }
-        .tt-wrap td.tt-slot.tt-sun { border-right: 0.5px solid #f0f0f0; }
-        .tt-wrap tr.tt-h td { height: 30px; }
-        .tt-blk { position: absolute; inset: 2px; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2px 2px; }
-        .tt-blk .tt-t { font-size: 8px; font-weight: 500; text-align: center; line-height: 1.3; }
-        .tt-blk .tt-s { font-size: 7px; text-align: center; line-height: 1.3; margin-top: 1px; opacity: 0.72; }
-        .tt-b1 { background: #E6F1FB; color: #0C447C; }
-        .tt-b2 { background: #D6EEF7; color: #0a3d5c; }
-        .tt-t1 { background: #E1F5EE; color: #085041; }
-        .tt-t2 { background: #D4EFE3; color: #0a4535; }
-        .tt-sd { background: #F5EDD6; color: #6b4200; }
-        .tt-dg { background: #F0E6F6; color: #5b1f7a; }
-        .tt-pu { background: #EEEDFE; color: #3C3489; }
-        .tt-co { background: #FAECE7; color: #712B13; }
-        .tt-pk { background: #FBEAF0; color: #72243E; }
-        .tt-gr { background: #EFEFED; color: #5F5E5A; }
-        .tt-legend { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-        .tt-li { display: flex; align-items: center; gap: 3px; font-size: 8.5px; color: #888; }
-        .tt-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
-      
-    /* ── 시간표 공유 버튼 실제 중앙 정렬 보정 ── */
-    .tt-share-wrap {
-      display: flex !important;
-      justify-content: center !important;
-      width: 100% !important;
-      margin-top: 14px !important;
-      padding: 0 !important;
-    }
-    .tt-share-btn.tt-share-action {
-      width: min(100%, 320px) !important;
-      display: grid !important;
-      grid-template-columns: 44px 1fr 44px !important;
-      align-items: center !important;
-      justify-content: center !important;
-      column-gap: 12px !important;
-      padding: 10px 12px !important;
-      text-align: center !important;
-    }
-    .tt-share-icon-box {
-      grid-column: 1 !important;
-      justify-self: center !important;
-    }
-    .tt-share-text {
-      grid-column: 2 !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      width: 100% !important;
-    }
-    .tt-share-title,
-    .tt-share-sub {
-      display: block !important;
-      width: 100% !important;
-      text-align: center !important;
-    }
-
-</style>
+<section class="section" id="timetable-section"><div class="section-head"><div class="section-kicker">TIMETABLE</div><h2 class="section-title">수업 시간표</h2><p class="section-desc">단체수업과 개별진도 운영 블록을 함께 확인할 수 있습니다.</p></div><div class="timetable-card"><div id="timetable-capture"><div class="tt-brand"><div class="tt-brand-title">트이다 수학 — 용호점 운영 시간표</div><div class="tt-brand-sub">2026 여름방학 특강</div></div>
 <div class="tt-wrap">
-<div style="overflow-x:auto;">
 <table style="min-width:300px;">
 <colgroup>
 <col class="tt-time"/>
@@ -1035,25 +875,23 @@
 </tr>
 </tbody>
 </table>
-</div>
 <div class="tt-legend">
-<div class="tt-li"><div class="tt-dot" style="background:#E1F5EE;border:0.5px solid #5bbf9a"></div>중등 개별진도<br/>(숨마·원리해설)</div>
-<div class="tt-li"><div class="tt-dot" style="background:#D4EFE3;border:0.5px solid #3aaa72"></div>중등 2-2 심화 (고쟁이)</div>
-<div class="tt-li"><div class="tt-dot" style="background:#D6EEF7;border:0.5px solid #6ab0d4"></div>공통수학2 개념완성</div>
-<div class="tt-li"><div class="tt-dot" style="background:#F5EDD6;border:0.5px solid #c49a3a"></div>대수 개념완성</div>
-<div class="tt-li"><div class="tt-dot" style="background:#EEEDFE;border:0.5px solid #AFA9EC"></div>미적분1 개념완성</div>
-<div class="tt-li"><div class="tt-dot" style="background:#F0E6F6;border:0.5px solid #b070d0"></div>노베 도형가이드</div>
-<div class="tt-li"><div class="tt-dot" style="background:#FBEAF0;border:0.5px solid #ED93B1"></div>공통수학1 심화</div>
-<div class="tt-li"><div class="tt-dot" style="background:#FAECE7;border:0.5px solid #F0997B"></div>공통수학2 심화</div>
-<div class="tt-li"><div class="tt-dot" style="background:#EFEFED;border:0.5px solid #B4B2A9"></div>개별진도</div>
+<div class="tt-li"><div class="tt-dot" style="background:#E1F5EE"></div>중등 개별진도 (숨마·원리해설)</div>
+<div class="tt-li"><div class="tt-dot" style="background:#D4EFE3"></div>중등 2-2 심화 (고쟁이)</div>
+<div class="tt-li"><div class="tt-dot" style="background:#D6EEF7"></div>공통수학2 개념완성</div>
+<div class="tt-li"><div class="tt-dot" style="background:#F5EDD6"></div>대수 개념완성</div>
+<div class="tt-li"><div class="tt-dot" style="background:#EEEDFE"></div>미적분1 개념완성</div>
+<div class="tt-li"><div class="tt-dot" style="background:#F0E6F6"></div>노베 도형가이드</div>
+<div class="tt-li"><div class="tt-dot" style="background:#FBEAF0"></div>공통수학1 심화</div>
+<div class="tt-li"><div class="tt-dot" style="background:#FAECE7"></div>공통수학2 심화</div>
+<div class="tt-li"><div class="tt-dot" style="background:#EFEFED"></div>개별진도</div>
 </div>
-</div>
-</div><div class="tt-share-wrap"><button class="tt-share-btn tt-share-action" onclick="shareTimetable()" type="button"><span class="tt-share-icon-box"><svg aria-hidden="true" fill="none" height="19" viewbox="0 0 24 24" width="19">
+</div></div><div class="tt-share-wrap"><button class="tt-share-btn tt-share-action" onclick="shareTimetable()" type="button"><span class="tt-share-icon-box"><svg aria-hidden="true" fill="none" height="19" viewbox="0 0 24 24" width="19">
 <path d="M12 3v12" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
 <path d="M7 8l5-5 5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
 </svg></span><span class="tt-share-text"><span class="tt-share-title">시간표 공유</span><span class="tt-share-sub">카카오톡 · 이미지 저장</span></span></button></div>
-</div>
+</div></section>
 <div class="note">
 <div style="margin-bottom:10px; font-size:13px; color:#555;">문의 · 상담</div>
 <div style="display:flex; flex-direction:column; gap:8px;">
