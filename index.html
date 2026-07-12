@@ -363,11 +363,11 @@
   .tt-brand-title{font-size:15px;font-weight:900;color:#0d1130;}
   .tt-brand-sub{font-size:11px;color:#999;margin-top:3px;}
   .tt-wrap{overflow-x:auto;}
-  .tt-wrap table{width:100%;min-width:320px;table-layout:fixed;border-collapse:collapse;}
+  .tt-wrap table{width:100%;min-width:480px;table-layout:fixed;border-collapse:collapse;}
   .tt-wrap col.tt-time{width:35px;}
   .tt-wrap th{font-size:10px;color:#888;font-weight:800;padding:4px 2px 8px;border-bottom:1px solid #eee;}
   .tt-wrap .tt-th{color:transparent;}
-  .tt-wrap td{height:30px;}
+  .tt-wrap td{height:34px;}
   .tt-tc{font-size:8.5px;color:#aaa;text-align:right;vertical-align:top;padding:4px 4px 0 0;white-space:nowrap;}
   .tt-slot{border-left:1px solid #f1f1ef;border-top:1px solid #f1f1ef;position:relative;vertical-align:top;}
   .tt-sun{border-right:1px solid #f1f1ef;}
@@ -384,6 +384,12 @@
   .tt-dg{background:#f0e6f6;color:#5b1f7a;}
   .tt-pu{background:#eeedfe;color:#3c3489;}
   .tt-gr{background:#EFEFED;color:#5F5E5A;}
+  .tt-blk-ov{overflow:hidden;cursor:pointer;}
+  .tt-blk-ov .tt-t{font-size:5.9px;line-height:1.2;}
+  .tt-blk-ov::after{content:"";position:absolute;top:2px;right:2px;width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.5;}
+  .tt-note{font-size:9px;color:#8a8a86;line-height:1.55;margin-top:9px;padding:7px 9px;background:#faf9f6;border:1px solid #efeee9;border-radius:7px;}
+  #tt-pop{position:fixed;z-index:9999;display:none;background:#fff;border:1px solid #e5e5e2;border-radius:9px;box-shadow:0 8px 24px rgba(0,0,0,.16);padding:9px 11px;font-size:11.5px;line-height:1.55;color:#2a2a28;max-width:200px;pointer-events:none;}
+  #tt-pop b{font-weight:700;color:#0d1130;display:inline-block;margin-bottom:2px;}
   .tt-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
   .tt-li{display:flex;align-items:center;gap:4px;font-size:8.5px;color:#777;}
   .tt-dot{width:8px;height:8px;border-radius:3px;}
@@ -768,12 +774,13 @@
 <tr class="tt-h"><td class="tt-tc">16:00</td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
 <tr class="tt-h"><td class="tt-tc">17:00</td><td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td><td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td><td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td><td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td><td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
 <tr class="tt-h"><td class="tt-tc">18:00</td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
-<tr class="tt-h"><td class="tt-tc">19:00</td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br/>개념완성</span><span class="tt-s">시발점 + 워크북</span></div></td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br/>개념완성</span><span class="tt-s">시발점 + 워크북</span></div></td><td class="tt-slot" rowspan="2" style="position:relative"><div class="tt-blk tt-gr" style="inset:2px;position:absolute"><span class="tt-t">개별진도</span></div></td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-dg" style="inset:2px;position:absolute"><span class="tt-t">도형<br/>가이드</span><span class="tt-s">노베</span></div></td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-pu" style="inset:2px;position:absolute"><span class="tt-t">미적분1<br/>개념완성</span><span class="tt-s">시발점 + 워크북</span></div></td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
+<tr class="tt-h"><td class="tt-tc">19:00</td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-pu tt-blk-ov" data-tip="<b>미적분1 개념완성</b><br>월·화·금 19:00–22:00<br>토 09:00–12:00<br>교재 : 시발점 + 워크북" style="position:absolute;left:2px;right:51%;top:2px;bottom:2px"><span class="tt-t">미적분1<br/>개념완성</span></div><div class="tt-blk tt-b2 tt-blk-ov" data-tip="<b>공통수학2 개념완성 (저녁반)</b><br>월·화·수·금 19:00–22:00<br>교재 : 시발점 + 워크북" style="position:absolute;left:51%;right:2px;top:2px;bottom:2px"><span class="tt-t">공통수학2<br/>개념완성</span></div></td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-pu tt-blk-ov" data-tip="<b>미적분1 개념완성</b><br>월·화·금 19:00–22:00<br>토 09:00–12:00<br>교재 : 시발점 + 워크북" style="position:absolute;left:2px;right:51%;top:2px;bottom:2px"><span class="tt-t">미적분1<br/>개념완성</span></div><div class="tt-blk tt-b2 tt-blk-ov" data-tip="<b>공통수학2 개념완성 (저녁반)</b><br>월·화·수·금 19:00–22:00<br>교재 : 시발점 + 워크북" style="position:absolute;left:51%;right:2px;top:2px;bottom:2px"><span class="tt-t">공통수학2<br/>개념완성</span></div></td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-gr tt-blk-ov" data-tip="<b>개별진도</b><br>수 19:00–21:00<br>개인별 맞춤 진도" style="position:absolute;left:2px;right:51%;top:2px;height:calc(66.66% - 3px)"><span class="tt-t">개별진도</span></div><div class="tt-blk tt-b2 tt-blk-ov" data-tip="<b>공통수학2 개념완성 (저녁반)</b><br>월·화·수·금 19:00–22:00<br>교재 : 시발점 + 워크북" style="position:absolute;left:51%;right:2px;top:2px;bottom:2px"><span class="tt-t">공통수학2<br/>개념완성</span></div></td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-dg" style="inset:2px;position:absolute"><span class="tt-t">도형<br/>가이드</span><span class="tt-s">노베</span></div></td><td class="tt-slot" rowspan="3" style="position:relative"><div class="tt-blk tt-pu tt-blk-ov" data-tip="<b>미적분1 개념완성</b><br>월·화·금 19:00–22:00<br>토 09:00–12:00<br>교재 : 시발점 + 워크북" style="position:absolute;left:2px;right:51%;top:2px;bottom:2px"><span class="tt-t">미적분1<br/>개념완성</span></div><div class="tt-blk tt-b2 tt-blk-ov" data-tip="<b>공통수학2 개념완성 (저녁반)</b><br>월·화·수·금 19:00–22:00<br>교재 : 시발점 + 워크북" style="position:absolute;left:51%;right:2px;top:2px;bottom:2px"><span class="tt-t">공통수학2<br/>개념완성</span></div></td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
 <tr class="tt-h"><td class="tt-tc">20:00</td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
-<tr class="tt-h"><td class="tt-tc">21:00</td><td class="tt-slot"></td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
+<tr class="tt-h"><td class="tt-tc">21:00</td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
 <tr class="tt-h"><td class="tt-tc">22:00</td><td class="tt-slot"></td><td class="tt-slot"></td><td class="tt-slot"></td><td class="tt-slot"></td><td class="tt-slot"></td><td class="tt-slot"></td><td class="tt-slot tt-sun"></td></tr>
 </tbody>
 </table>
+<div class="tt-note">＊저녁 19:00–22:00 : 월·화·금은 <b>미적분1 개념완성</b>, 수는 <b>개별진도</b>가 <b>공통수학2 개념완성(저녁반)</b>과 같은 시간에 함께 운영됩니다. 각 반은 별도 반이며, 블록을 누르면 상세 정보가 표시됩니다.</div>
 <div class="tt-legend">
 <div class="tt-li"><div class="tt-dot" style="background:#D6EEF7"></div>공통수학2 개념완성</div>
 <div class="tt-li"><div class="tt-dot" style="background:#F5EDD6"></div>대수 개념완성</div>
@@ -1151,6 +1158,46 @@
     });
   })();
 
+</script>
+<div id="tt-pop" role="tooltip"></div>
+<script>
+  (function(){
+    var pop=document.getElementById('tt-pop');
+    var blocks=document.querySelectorAll('.tt-blk[data-tip]');
+    var current=null;
+    function place(el){
+      var r=el.getBoundingClientRect();
+      pop.style.display='block';
+      var pw=pop.offsetWidth, ph=pop.offsetHeight;
+      var left=r.left+r.width/2-pw/2;
+      left=Math.max(8,Math.min(left,window.innerWidth-pw-8));
+      var top=r.top-ph-8;
+      if(top<8) top=r.bottom+8;
+      pop.style.left=left+'px';
+      pop.style.top=top+'px';
+    }
+    function show(el){
+      pop.innerHTML=el.getAttribute('data-tip');
+      pop.style.display='block';
+      place(el);
+      current=el;
+    }
+    function hide(){pop.style.display='none';current=null;}
+    blocks.forEach(function(el){
+      el.addEventListener('mouseenter',function(){show(el);});
+      el.addEventListener('mouseleave',function(){if(current===el)hide();});
+      el.addEventListener('click',function(e){
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        if(current===el){hide();}else{show(el);}
+      },true);
+    });
+    document.addEventListener('click',function(e){
+      if(current && !current.contains(e.target)) hide();
+    });
+    window.addEventListener('scroll',function(){if(current)hide();},true);
+    window.addEventListener('resize',function(){if(current)hide();});
+  })();
 </script>
 </body>
 </html>
