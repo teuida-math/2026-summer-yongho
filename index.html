@@ -1038,21 +1038,18 @@
     btn.textContent = '제출 중...';
     btn.disabled = true;
 
-    var params = new URLSearchParams({
-      name: name, grade: grade, course: course,
-      phone: phone, book: book, memo: memo,
-      timestamp: new Date().toLocaleString('ko-KR')
-    });
+    var message = '[희망 과정] ' + course + (book ? '\n[현재 교재] ' + book : '') + (memo ? '\n[문의] ' + memo : '');
 
-    fetch(SHEET_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' })
-      .then(function() {
-        document.getElementById('form-content').style.display = 'none';
-        document.getElementById('success-box').style.display = 'block';
-      })
-      .catch(function() {
-        document.getElementById('form-content').style.display = 'none';
-        document.getElementById('success-box').style.display = 'block';
-      });
+    function done() {
+      document.getElementById('form-content').style.display = 'none';
+      document.getElementById('success-box').style.display = 'block';
+    }
+
+    fetch('https://teuida-app.vercel.app/api/consult', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, phone: phone, grade: grade, branch: '용호', message: message })
+    }).then(done).catch(done);
   }
   /* ── 시간표 공유 ── */
   async function shareTimetable() {
